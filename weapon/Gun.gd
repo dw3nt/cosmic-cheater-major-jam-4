@@ -29,7 +29,6 @@ func _process(delta):
 	position = holderLastPos + holdOffset
 	
 	if Input.is_action_pressed("shoot") && canShoot:
-		print(str(OS.get_unix_time()) + ": bang!")
 		emit_signal("bullet_fired")
 		
 		canShoot = false
