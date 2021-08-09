@@ -4,6 +4,7 @@ export(int) var shardCount = 6
 export(float) var explodeVelocity = 15
 export(float) var explodeRotation = 0.25
 export(float) var shardGravity = 30
+export(PackedScene) var lootScene
 
 var shardVelocityMap = {}
 
@@ -49,12 +50,21 @@ func explode():
 		add_child(shard)
 		
 	sprite.color.a = 0
+	
+
+func spawnLoot():
+	var inst = lootScene.instance()
+	inst.position = position
+	get_parent().call_deferred("add_child", inst)
 
 
 func _on_Crate_body_entered(body):
 	body.queue_free()
 	explode()
 	fadeDelayTimer.start()
+	
+	if lootScene:
+		spawnLoot()
 
 
 func _on_FadeDelayTimer_timeout():
