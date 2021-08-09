@@ -16,7 +16,6 @@ var hp = maxHp
 var flash = 0
 var canBeHurt = true
 
-onready var groundRay = $GroundRay
 onready var animation = $AnimationPlayer
 onready var sprite = $Sprite
 
