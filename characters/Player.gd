@@ -18,7 +18,7 @@ func _physics_process(delta):
 	if !is_on_floor() && !groundRay.is_colliding():
 		velocity.y += gravity
 	else:
-		if Input.is_action_just_pressed("move_up"):
+		if Input.is_action_just_pressed("jump"):
 			velocity.y = -jumpForce
 		else:
 			velocity.y = 0

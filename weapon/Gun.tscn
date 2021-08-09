@@ -16,6 +16,10 @@ position = Vector2( 10, 0 )
 
 [node name="PositionUpdateTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.01
+wait_time = 0.005
 autostart = true
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="timeout" from="PositionUpdateTimer" to="." method="_on_PositionUpdateTimer_timeout"]
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_ShootCooldownTimer_timeout"]

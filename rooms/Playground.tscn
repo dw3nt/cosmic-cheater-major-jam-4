@@ -48,3 +48,5 @@ position = Vector2( 144, 96 )
 [node name="Gun" parent="." instance=ExtResource( 3 )]
 holderNodePath = NodePath("../Player")
 holdOffset = Vector2( 0, -7 )
+
+[node name="BulletWrap" type="Node2D" parent="."]
