@@ -22,6 +22,11 @@ func _ready():
 
 
 func _process(delta):
+	if holder == null:
+		set_process(false)
+		queue_free()
+		return
+	
 	mousePos = get_global_mouse_position()
 	look_at(mousePos)
 	sprite.flip_v = mousePos.x < position.x
@@ -36,7 +41,8 @@ func _process(delta):
 
 
 func _on_PositionUpdateTimer_timeout():
-	holderLastPos = holder.position
+	if holder != null:
+		holderLastPos = holder.position
 
 
 func _on_ShootCooldownTimer_timeout():

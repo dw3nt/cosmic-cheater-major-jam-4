@@ -14,7 +14,6 @@ var moveDir = 0
 var flash = 0
 var hp = maxHp
 
-onready var groundRay = $GroundRay
 onready var animation = $AnimationPlayer
 onready var sprite = $Sprite
 onready var forwardRay = $ForwardRay
@@ -31,10 +30,10 @@ func _physics_process(delta):
 	
 	velocity.x = moveSpeed * moveDir
 	
-	if !is_on_floor() && !groundRay.is_colliding():
+	if !is_on_floor():
 		velocity.y += gravity
 	else:
-		velocity.y = 0
+		velocity.y = gravity
 	
 	if velocity.x != 0:
 		animation.play("run")

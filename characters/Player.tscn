@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/images/player/player.png" type="Texture" id=1]
 [ext_resource path="res://characters/Player.gd" type="Script" id=2]
@@ -71,8 +71,12 @@ tracks/0/keys = {
 "values": [ 1, 2 ]
 }
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 10 )
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
+collision/safe_margin = 0.01
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -85,7 +89,6 @@ position = Vector2( 0, -11 )
 shape = SubResource( 1 )
 
 [node name="GroundRay" type="RayCast2D" parent="."]
-enabled = true
 cast_to = Vector2( 0, 0.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -94,3 +97,12 @@ anims/idle = SubResource( 2 )
 anims/jump_down = SubResource( 3 )
 anims/jump_up = SubResource( 4 )
 anims/run = SubResource( 5 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 0, -10 )
+shape = SubResource( 6 )
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
