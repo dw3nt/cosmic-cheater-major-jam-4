@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/Wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapon/Gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/Playground.gd" type="Script" id=4]
 [ext_resource path="res://characters/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/EnemyDead.tscn" type="PackedScene" id=6]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource( 4 )
@@ -12,41 +13,69 @@ script = ExtResource( 4 )
 [node name="WallWrap" type="Node2D" parent="."]
 
 [node name="Wall" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 80, 128 )
 
 [node name="Wall2" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 96, 96 )
+position = Vector2( 64, 96 )
 
 [node name="Wall3" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 96, 112 )
+position = Vector2( 64, 112 )
 
 [node name="Wall4" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 240, 112 )
+position = Vector2( 208, 112 )
 
-[node name="Wall5" parent="WallWrap" instance=ExtResource( 2 )]
+[node name="Wall12" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 224, 112 )
 
+[node name="Wall13" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 240, 112 )
+
+[node name="Wall14" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 256, 112 )
+
+[node name="Wall15" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 272, 112 )
+
+[node name="Wall16" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 288, 112 )
+
+[node name="Wall18" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 304, 112 )
+
+[node name="Wall19" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 320, 112 )
+
+[node name="Wall20" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 320, 96 )
+
+[node name="Wall17" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 192, 96 )
+
+[node name="Wall5" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 192, 112 )
+
 [node name="Wall6" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 128, 128 )
+position = Vector2( 96, 128 )
 
 [node name="Wall7" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 144, 128 )
 
 [node name="Wall8" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 160, 128 )
+position = Vector2( 128, 128 )
 
 [node name="Wall9" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 176, 128 )
+position = Vector2( 144, 128 )
 
 [node name="Wall10" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 192, 128 )
+position = Vector2( 160, 128 )
 
 [node name="Wall11" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 208, 128 )
+position = Vector2( 176, 128 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 96, 80 )
+position = Vector2( 64, 80 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
+position = Vector2( 48, 64 )
 holderNodePath = NodePath("../Player")
 holdOffset = Vector2( 0, -7 )
 
@@ -55,4 +84,7 @@ holdOffset = Vector2( 0, -7 )
 [node name="EnemyWrap" type="Node2D" parent="."]
 
 [node name="Enemy" parent="EnemyWrap" instance=ExtResource( 5 )]
-position = Vector2( 160, 112 )
+position = Vector2( 128, 112 )
+
+[node name="EnemyDead" parent="EnemyWrap" instance=ExtResource( 6 )]
+position = Vector2( 240, 80 )
