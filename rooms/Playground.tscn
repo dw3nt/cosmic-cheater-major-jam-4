@@ -130,3 +130,4 @@ lootScene = ExtResource( 7 )
 [node name="LevelUi" parent="UIWrap" instance=ExtResource( 8 )]
 
 [node name="DevConsole" parent="UIWrap" instance=ExtResource( 9 )]
+pause_mode = 2

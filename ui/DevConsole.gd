@@ -8,6 +8,12 @@ var canToggle = true
 onready var historyText = $MarginContainer/VBoxContainer/InputHistoryTextEdit
 onready var inputText = $MarginContainer/VBoxContainer/InputLineEdit
 onready var animation = $AnimationPlayer
+
+
+func _input(event):
+	if event.is_action_pressed("console"):
+		get_tree().paused = !get_tree().paused
+		toggleConsole()
 	
 	
 func toggleConsole():

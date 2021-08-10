@@ -25,11 +25,6 @@ func _ready():
 	
 	for index in range(crateWrap.get_child_count()):
 		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
-		
-		
-func _input(event):
-	if event.is_action_pressed("console"):
-		devConsole.toggleConsole()
 	
 	
 func setCustomCursor():
