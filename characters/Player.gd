@@ -62,12 +62,11 @@ func _on_Hurtbox_body_entered(body):
 	if !canBeHurt:
 		return
 	
-	emit_signal("player_damaged")
-	
 	flash = maxFlash
 	sprite.material = WHITE_FLASH_SHADER
 	hp -= 1
 	canBeHurt = false
+	emit_signal("player_damaged")
 	
 	if hp <= 0:
 		get_parent().find_node("Gun").queue_free()	# use a signal to fix this

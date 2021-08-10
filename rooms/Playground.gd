@@ -2,15 +2,20 @@ extends Node2D
 
 const BULLET_SCENE = preload("res://weapon/Bullet.tscn")
 
-onready var bulletWrap = $BulletWrap
+onready var player = $Player
 onready var gun = $Gun
+onready var bulletWrap = $BulletWrap
+onready var ui = $UIWrap/UI
 
 
 func _ready():
 	get_tree().get_root().connect("size_changed", self, "_on_Root_size_changed")
 	setCustomCursor()
 	
+	player.connect("player_damaged", self, "_on_Player_player_damaged")
 	gun.connect("bullet_fired", self, "_on_Gun_bullet_fired")
+	
+	ui.updateHearts(player.hp, player.maxHp)
 	
 	
 func setCustomCursor():
@@ -33,6 +38,10 @@ func setCustomCursor():
 	
 func _on_Root_size_changed():
 	setCustomCursor()
+	
+	
+func _on_Player_player_damaged():
+	ui.updateHearts(player.hp, player.maxHp)
 	
 
 func _on_Gun_bullet_fired():
