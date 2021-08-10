@@ -11,6 +11,7 @@ export(PackedScene) var lootScene
 var shardVelocityMap = {}
 
 onready var sprite = $Polygon2D
+onready var collider = $CollisionShape2D
 onready var animation = $AnimationPlayer
 onready var fadeDelayTimer = $FadeDelayTimer
 
@@ -64,6 +65,7 @@ func spawnLoot():
 func _on_Crate_body_entered(body):
 	body.queue_free()
 	explode()
+	collider.set_deferred("disabled", true)
 	fadeDelayTimer.start()
 	
 	if lootScene:
