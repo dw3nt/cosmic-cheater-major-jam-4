@@ -1,5 +1,7 @@
 extends Area2D
 
+signal coin_collected
+
 export(float) var tweenDuration = 1.5
 
 var startPos = Vector2.ZERO
@@ -19,7 +21,7 @@ func startTween():
 
 
 func _on_Coin_body_entered(body):
-	print("coin picked up")
+	emit_signal("coin_collected")
 	queue_free()
 
 

@@ -1,6 +1,7 @@
 extends Control
 
-onready var heartWrap = $TopMarginWrap/HeartWrap
+onready var heartWrap = $TopMarginWrap/HBoxContainer/HeartWrap
+onready var coinLabel = $TopMarginWrap/HBoxContainer/CoinsWrap/CoinsLabel
 
 
 func updateHearts(hp, maxHp):
@@ -10,3 +11,7 @@ func updateHearts(hp, maxHp):
 			currentHeart.fillHeart()
 		else:
 			currentHeart.emptyHeart()
+			
+			
+func updateCoins(coins):
+	coinLabel.text = str(coins)

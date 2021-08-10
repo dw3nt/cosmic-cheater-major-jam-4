@@ -1,10 +1,14 @@
 extends Node2D
 
 const BULLET_SCENE = preload("res://weapon/Bullet.tscn")
+const COIN_SCENE = preload("res://objects/Coin.tscn")
+
+var coins = 0
 
 onready var player = $Player
 onready var gun = $Gun
 onready var bulletWrap = $BulletWrap
+onready var crateWrap = $CrateWrap
 onready var ui = $UIWrap/UI
 
 
@@ -16,6 +20,10 @@ func _ready():
 	gun.connect("bullet_fired", self, "_on_Gun_bullet_fired")
 	
 	ui.updateHearts(player.hp, player.maxHp)
+	ui.updateCoins(coins)
+	
+	for index in range(crateWrap.get_child_count()):
+		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
 	
 	
 func setCustomCursor():
@@ -50,3 +58,13 @@ func _on_Gun_bullet_fired():
 	inst.global_position = gun.bulletSpawnPos.global_position
 	inst.moveDir = (get_global_mouse_position() - gun.global_position).normalized()
 	bulletWrap.add_child(inst)
+	
+
+func _on_Crate_loot_spawned(loot):
+	if loot.is_in_group("coin"):
+		loot.connect("coin_collected", self, "_on_Coin_coin_collected")
+		
+		
+func _on_Coin_coin_collected():
+	coins += 1
+	ui.updateCoins(coins)
