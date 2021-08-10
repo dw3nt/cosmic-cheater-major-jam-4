@@ -7,9 +7,8 @@ const WHITE_FLASH_SHADER = preload("res://shaders/WhiteFlash.tres")
 export(float) var moveSpeed = 150
 export(float) var jumpForce = 200
 export(float) var gravity = 8
-export(int) var iFrames = 3
 export(int) var maxHp = 3
-export(int) var maxFlash = 100
+export(int) var maxFlash = 80
 
 var velocity = Vector2.ZERO
 var hp = maxHp

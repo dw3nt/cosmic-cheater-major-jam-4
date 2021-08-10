@@ -112,6 +112,7 @@ console={
 2d_physics/layer_7="Crate"
 2d_physics/layer_8="Coin"
 2d_physics/layer_9="Heal"
+2d_physics/layer_10="Spike"
 
 [rendering]
 
