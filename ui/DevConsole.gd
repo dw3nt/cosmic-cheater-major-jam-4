@@ -1,37 +1,36 @@
 extends Control
 
-var commandOutputMap = {
-	# modifies specific properties on the player
-	"player.jump=" : "Player jump modified!",		#eg: "player.jump=300"
-	"player.gravity=": "Player gravity modified!",
-	"player.fire_rate=": "Player fire rate modified!",
-	"player.damage=": "Player damage modified!",
-	
-	# changes gravity variable for ALL enemies makes them fly into the air
-	"enemies.gravity=": "Enemies gravity modified!",	# eg: "enemies.gravity=-200"
-	
-	# god mode
-	"painkiller=": "God Mode activated!",		# eg: "painkiller" disables player hurtbox
-	
-	# add money per ! character (Sims reference)
-	"rosebud!": "Money added!"			# eg: "rosebud!!!" gives 300 gold
-}
+signal command_inputted
+
+var cm = load("res://scripts/CommandManager.gd").new()
+var canToggle = true
 
 onready var historyText = $MarginContainer/VBoxContainer/InputHistoryTextEdit
 onready var inputText = $MarginContainer/VBoxContainer/InputLineEdit
-
-
-func _ready():
-	displayConsole()
+onready var animation = $AnimationPlayer
+	
+	
+func toggleConsole():
+	if !canToggle:
+		return
+		
+	if visible:
+		hideConsole()
+	else:
+		displayConsole()
 	
 
 func displayConsole():
-	inputText.grab_focus()
+	animation.play("slide_in")
+	
+	
+func hideConsole():
+	animation.play("slide_out")
 	
 	
 func appendTextToHistory(newText):
-	newText = cleanInput(newText)
-	var command = checkForCommand(newText)
+	var parsedText = cleanInput(newText)
+	var command = checkForCommand(parsedText)
 	
 	var updateText = ""
 	if historyText.text:
@@ -40,7 +39,12 @@ func appendTextToHistory(newText):
 	updateText += newText + "\n\t"
 	
 	if command:
-		updateText += commandOutputMap[command]
+		var commandValue = cm.parseCommandValue(command, parsedText)
+		if commandValue == null:
+			updateText += "Error! Invalid argument!"
+		else:
+			updateText += cm.commandOutputMap[command]
+			emit_signal("command_inputted", command, commandValue)
 	else:
 		updateText += "Error! Invalid command!"
 	
@@ -53,14 +57,30 @@ func cleanInput(newText):
 	return newText.strip_edges().replace(" ", "").to_lower()
 	
 	
-func checkForCommand(inputText):
-	for command in commandOutputMap.keys():
-		
-		if command in inputText:
-			return command
+func checkForCommand(text):
+	for commandName in cm.commands.keys():
+		if cm.commands[commandName] in text:
+			return commandName
 			
 	return false
+	
+	
+func _on_InputLineEdit_text_changed(new_text):
+	inputText.text = new_text.replace("`", "")
+	inputText.caret_position = inputText.text.length()
 
 
 func _on_InputLineEdit_text_entered(new_text):
 	appendTextToHistory(new_text)
+
+
+func _on_AnimationPlayer_animation_started(anim_name):
+	canToggle = false
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	canToggle = true
+	if visible:
+		inputText.grab_focus()
+	else:
+		inputText.release_focus()

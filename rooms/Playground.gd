@@ -9,7 +9,8 @@ onready var player = $Player
 onready var gun = $Gun
 onready var bulletWrap = $BulletWrap
 onready var crateWrap = $CrateWrap
-onready var ui = $UIWrap/UI
+onready var levelUi = $UIWrap/LevelUi
+onready var devConsole = $UIWrap/DevConsole
 
 
 func _ready():
@@ -19,11 +20,16 @@ func _ready():
 	player.connect("player_damaged", self, "_on_Player_player_damaged")
 	gun.connect("bullet_fired", self, "_on_Gun_bullet_fired")
 	
-	ui.updateHearts(player.hp, player.maxHp)
-	ui.updateCoins(coins)
+	levelUi.updateHearts(player.hp, player.maxHp)
+	levelUi.updateCoins(coins)
 	
 	for index in range(crateWrap.get_child_count()):
 		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
+		
+		
+func _input(event):
+	if event.is_action_pressed("console"):
+		devConsole.toggleConsole()
 	
 	
 func setCustomCursor():
@@ -49,7 +55,7 @@ func _on_Root_size_changed():
 	
 	
 func _on_Player_player_damaged():
-	ui.updateHearts(player.hp, player.maxHp)
+	levelUi.updateHearts(player.hp, player.maxHp)
 	
 
 func _on_Gun_bullet_fired():
@@ -67,4 +73,4 @@ func _on_Crate_loot_spawned(loot):
 		
 func _on_Coin_coin_collected():
 	coins += 1
-	ui.updateCoins(coins)
+	levelUi.updateCoins(coins)
