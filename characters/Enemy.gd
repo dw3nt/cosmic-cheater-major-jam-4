@@ -8,6 +8,7 @@ export(float) var jumpForce = 200
 export(float) var gravity = 8
 export(int) var maxFlash = 3
 export(int) var maxHp = 2
+export(int) var damage = 1
 
 var velocity = Vector2.ZERO
 var moveDir = 0
@@ -52,7 +53,9 @@ func _physics_process(delta):
 func _on_Hurtbox_body_entered(body):
 	flash = maxFlash
 	sprite.material = WHITE_FLASH_SHADER
+	
 	hp -= body.damage
+		
 	if hp <= 0:
 		var inst = ENEMEY_DEAD_SCENE.instance()
 		inst.position = position
@@ -60,4 +63,5 @@ func _on_Hurtbox_body_entered(body):
 		get_parent().call_deferred("add_child", inst)
 		queue_free()
 	
-	body.queue_free()
+	if body.is_in_group("bullet"):
+		body.queue_free()

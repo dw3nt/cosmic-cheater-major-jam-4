@@ -67,7 +67,7 @@ func _on_Hurtbox_body_entered(body):
 	sprite.material = WHITE_FLASH_SHADER
 	
 	if !isInvincible:
-		hp -= 1
+		hp -= body.damage
 		
 	canBeHurt = false
 	emit_signal("player_damaged")

@@ -148,6 +148,9 @@ holderNodePath = NodePath("../Player")
 [node name="Enemy" parent="EnemyWrap" instance=ExtResource( 5 )]
 position = Vector2( 128, 144 )
 
+[node name="Enemy2" parent="EnemyWrap" instance=ExtResource( 5 )]
+position = Vector2( 16, 112 )
+
 [node name="SpikeWrap" type="Node2D" parent="."]
 
 [node name="Spike" parent="SpikeWrap" instance=ExtResource( 11 )]
