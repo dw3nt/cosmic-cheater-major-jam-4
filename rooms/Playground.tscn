@@ -7,7 +7,7 @@
 [ext_resource path="res://characters/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/Crate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/Coin.tscn" type="PackedScene" id=7]
-[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/LevelUi.tscn" type="PackedScene" id=8]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource( 4 )
@@ -126,4 +126,4 @@ lootScene = ExtResource( 7 )
 
 [node name="UIWrap" type="Node" parent="."]
 
-[node name="UI" parent="UIWrap" instance=ExtResource( 8 )]
+[node name="LevelUi" parent="UIWrap" instance=ExtResource( 8 )]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/DevConsole.gd" type="Script" id=2]
+
+[node name="DevConsole" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.490196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 312.0
+margin_bottom = 172.0
+alignment = 1
+
+[node name="InputHistoryTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer"]
+margin_right = 304.0
+margin_bottom = 144.0
+size_flags_vertical = 3
+readonly = true
+breakpoint_gutter = true
+context_menu_enabled = false
+selecting_enabled = false
+wrap_enabled = true
+
+[node name="InputLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+margin_top = 148.0
+margin_right = 304.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 16 )
+max_length = 50
+context_menu_enabled = false
+selecting_enabled = false
+caret_blink = true
+[connection signal="text_entered" from="MarginContainer/VBoxContainer/InputLineEdit" to="." method="_on_InputLineEdit_text_entered"]
