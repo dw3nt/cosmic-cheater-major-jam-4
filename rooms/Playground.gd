@@ -85,9 +85,17 @@ func _on_Crate_loot_spawned(loot):
 	if loot.is_in_group("coin"):
 		loot.connect("coin_collected", self, "_on_Coin_coin_collected")
 		
+	if loot.is_in_group("heart_pickup"):
+		loot.connect("heart_pickup_collected", self, "_on_HeartPickup_heart_pickup_collected")
+		
 		
 func _on_Coin_coin_collected():
 	updateCoins(1)
+	
+	
+func _on_HeartPickup_heart_pickup_collected():
+	player.hp += 1
+	levelUi.updateHearts(player.hp, player.maxHp)
 
 
 func _on_DevConsole_command_inputted(command, value):
