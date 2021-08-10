@@ -15,6 +15,7 @@ var bulletDamage = 1
 var coins = 0
 
 onready var player = $Player
+onready var camera = $Player/Camera
 onready var gun = $Gun
 onready var bulletWrap = $BulletWrap
 onready var enemyWrap = $EnemyWrap
@@ -30,10 +31,14 @@ func _ready():
 	setCustomCursor()
 	
 	player.connect("player_damaged", self, "_on_Player_player_damaged")
+	player.connect("player_died", self, "_on_Player_player_died")
 	gun.connect("bullet_fired", self, "_on_Gun_bullet_fired")
 	
 	levelUi.updateHearts(player.hp, player.maxHp)
 	levelUi.updateCoins(coins)
+	
+	for index in range(enemyWrap.get_child_count()):
+		enemyWrap.get_child(index).connect("enemy_died", self, "_on_Enemy_enemy_died")
 	
 	for index in range(crateWrap.get_child_count()):
 		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
@@ -70,6 +75,12 @@ func _on_Root_size_changed():
 	
 func _on_Player_player_damaged():
 	levelUi.updateHearts(player.hp, player.maxHp)
+	camera.shakeCamera(3, 15.0)
+	
+	
+func _on_Player_player_died():
+	gun.queue_free()
+	camera.shakeCamera(6, 80.0)
 	
 
 func _on_Gun_bullet_fired():
@@ -79,6 +90,12 @@ func _on_Gun_bullet_fired():
 	inst.moveDir = (get_global_mouse_position() - gun.global_position).normalized()
 	inst.damage = bulletDamage
 	bulletWrap.add_child(inst)
+	
+	camera.shakeCamera(1, 15.0)
+	
+	
+func _on_Enemy_enemy_died():
+	camera.shakeCamera(2, 15.0)
 	
 
 func _on_Crate_loot_spawned(loot):

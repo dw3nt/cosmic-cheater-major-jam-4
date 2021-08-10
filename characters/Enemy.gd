@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal enemy_died
+
 const WHITE_FLASH_SHADER = preload("res://shaders/WhiteFlash.tres")
 const ENEMEY_DEAD_SCENE = preload("res://characters/EnemyDead.tscn")
 
@@ -61,6 +63,7 @@ func _on_Hurtbox_body_entered(body):
 		inst.position = position
 		inst.moveDir = sign(position.x - body.position.x)
 		get_parent().call_deferred("add_child", inst)
+		emit_signal("enemy_died")
 		queue_free()
 	
 	if body.is_in_group("bullet"):
