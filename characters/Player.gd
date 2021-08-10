@@ -15,9 +15,11 @@ var velocity = Vector2.ZERO
 var hp = maxHp
 var flash = 0
 var canBeHurt = true
+var isInvincible = false
 
 onready var animation = $AnimationPlayer
 onready var sprite = $Sprite
+onready var hurtboxCollider = $Hurtbox/CollisionShape2D
 
 
 func _physics_process(delta):
@@ -64,7 +66,10 @@ func _on_Hurtbox_body_entered(body):
 	
 	flash = maxFlash
 	sprite.material = WHITE_FLASH_SHADER
-	hp -= 1
+	
+	if !isInvincible:
+		hp -= 1
+		
 	canBeHurt = false
 	emit_signal("player_damaged")
 	

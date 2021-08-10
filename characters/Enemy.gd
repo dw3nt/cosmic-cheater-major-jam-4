@@ -52,7 +52,7 @@ func _physics_process(delta):
 func _on_Hurtbox_body_entered(body):
 	flash = maxFlash
 	sprite.material = WHITE_FLASH_SHADER
-	hp -= 1
+	hp -= body.damage
 	if hp <= 0:
 		var inst = ENEMEY_DEAD_SCENE.instance()
 		inst.position = position

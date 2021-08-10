@@ -54,7 +54,7 @@ func parseCommandValue(command, input):
 			var equalPos = input.find("=")
 			var value = input.substr(equalPos + 1)
 			if value.is_valid_integer() || value.is_valid_float():
-				return int(value)
+				return float(value)
 			else:
 				return null
 			

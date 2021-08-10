@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var moveSpeed = 300
 var moveDir = Vector2.RIGHT
+var damage = 1
 
 
 func _physics_process(delta):

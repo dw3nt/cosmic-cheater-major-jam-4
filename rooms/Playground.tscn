@@ -131,3 +131,4 @@ lootScene = ExtResource( 7 )
 
 [node name="DevConsole" parent="UIWrap" instance=ExtResource( 9 )]
 pause_mode = 2
+[connection signal="command_inputted" from="UIWrap/DevConsole" to="." method="_on_DevConsole_command_inputted"]

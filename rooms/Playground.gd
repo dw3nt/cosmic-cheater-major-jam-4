@@ -1,19 +1,31 @@
 extends Node2D
 
+signal room_ready
+signal room_change_requested
+
+const CMD_EXE_SCRIPT = preload("res://scripts/CommandExecutioner.gd")
+
 const BULLET_SCENE = preload("res://weapon/Bullet.tscn")
 const COIN_SCENE = preload("res://objects/Coin.tscn")
 
+var cmdMgr = load("res://scripts/CommandManager.gd").new()
+var cmdExe
+
+var bulletDamage = 1
 var coins = 0
 
 onready var player = $Player
 onready var gun = $Gun
 onready var bulletWrap = $BulletWrap
+onready var enemyWrap = $EnemyWrap
 onready var crateWrap = $CrateWrap
 onready var levelUi = $UIWrap/LevelUi
 onready var devConsole = $UIWrap/DevConsole
 
 
 func _ready():
+	cmdExe = CMD_EXE_SCRIPT.new(self, player, gun, enemyWrap)
+	
 	get_tree().get_root().connect("size_changed", self, "_on_Root_size_changed")
 	setCustomCursor()
 	
@@ -25,6 +37,8 @@ func _ready():
 	
 	for index in range(crateWrap.get_child_count()):
 		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
+		
+	emit_signal("room_ready")
 	
 	
 func setCustomCursor():
@@ -45,6 +59,11 @@ func setCustomCursor():
 	Input.set_custom_mouse_cursor(aimCursor, 0, hotspot)
 	
 	
+func updateCoins(value):
+	coins += value
+	levelUi.updateCoins(coins)
+	
+	
 func _on_Root_size_changed():
 	setCustomCursor()
 	
@@ -58,6 +77,7 @@ func _on_Gun_bullet_fired():
 	inst.transform = gun.transform
 	inst.global_position = gun.bulletSpawnPos.global_position
 	inst.moveDir = (get_global_mouse_position() - gun.global_position).normalized()
+	inst.damage = bulletDamage
 	bulletWrap.add_child(inst)
 	
 
@@ -67,5 +87,8 @@ func _on_Crate_loot_spawned(loot):
 		
 		
 func _on_Coin_coin_collected():
-	coins += 1
-	levelUi.updateCoins(coins)
+	updateCoins(1)
+
+
+func _on_DevConsole_command_inputted(command, value):
+	cmdExe.call(cmdMgr.commandFunctionMap[command], value)

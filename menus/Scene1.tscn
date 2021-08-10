@@ -28,8 +28,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="CenterContainer"]
-margin_left = 487.0
-margin_top = 293.0
-margin_right = 537.0
-margin_bottom = 307.0
+margin_left = 135.0
+margin_top = 83.0
+margin_right = 185.0
+margin_bottom = 97.0
 text = "Scene 1"
