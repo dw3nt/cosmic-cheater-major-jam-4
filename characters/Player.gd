@@ -13,12 +13,13 @@ export(int) var maxFlash = 80
 
 var velocity = Vector2.ZERO
 var hp = maxHp
-var flash = 0
 var canBeHurt = true
 var isInvincible = false
 var isDead = false
 
-onready var animation = $AnimationPlayer
+onready var moveAnim = $MovementAnimation
+onready var damageAnim = $DamageAnimation
+onready var invincibleTimer = $InviniclbeTimer
 onready var sprite = $Sprite
 onready var hurtboxCollider = $Hurtbox/CollisionShape2D
 
@@ -40,37 +41,26 @@ func _physics_process(delta):
 		
 	if !isDead:	
 		if velocity.y < 0:
-			animation.play("jump_up")
+			moveAnim.play("jump_up")
 		elif velocity.y > gravity: 
-			animation.play("jump_down")
+			moveAnim.play("jump_down")
 		elif velocity.x != 0:
-			animation.play("run")
+			moveAnim.play("run")
 		else:
-			animation.play("idle")
+			moveAnim.play("idle")
 		
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
 	
 	move_and_slide(velocity, Vector2.UP)
-	
-	if flash > 0:
-		flash -= 1
-		if flash % 5 == 0:
-			if sprite.material:
-				sprite.material = null
-			else:
-				sprite.material = WHITE_FLASH_SHADER
-	else:
-		sprite.material = null
-		canBeHurt = true
 
 
 func _on_Hurtbox_body_entered(body):
 	if !canBeHurt:
 		return
 	
-	flash = maxFlash
-	sprite.material = WHITE_FLASH_SHADER
+	damageAnim.play("damaged")
+	invincibleTimer.start()
 	
 	if !isInvincible:
 		hp -= body.damage
@@ -80,6 +70,11 @@ func _on_Hurtbox_body_entered(body):
 	
 	if hp <= 0:
 		hurtboxCollider.set_deferred("disabled", true)
-		animation.play("dead")
+		moveAnim.play("dead")
 		emit_signal("player_died")
 		isDead = true
+
+
+func _on_InviniclbeTimer_timeout():
+	canBeHurt = true
+	damageAnim.play("no_damage")
