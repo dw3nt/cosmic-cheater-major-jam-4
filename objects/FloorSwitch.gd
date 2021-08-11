@@ -15,12 +15,12 @@ func _ready():
 
 
 func updatePressedState():
-	if bodyCount > 0:
+	if bodyCount > 0 && !isPressed:
 		animation.play("pressed")
 		isPressed = true
 		if attachedDoor:
 			attachedDoor.openDoor()
-	else:
+	elif bodyCount <= 0:
 		animation.play("unpressed")
 		isPressed = false
 		if attachedDoor:

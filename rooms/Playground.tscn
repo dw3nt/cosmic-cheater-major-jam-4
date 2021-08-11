@@ -231,8 +231,11 @@ doorCost = 1
 position = Vector2( 257, 120 )
 
 [node name="FloorSwitch" parent="." instance=ExtResource( 14 )]
-position = Vector2( 32, 32 )
+position = Vector2( 176, 80 )
 attachedDoorPath = NodePath("../MetalDoor")
+
+[node name="MetalBlock" parent="." instance=ExtResource( 16 )]
+position = Vector2( 128, 80 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 48, 96 )
@@ -290,7 +293,4 @@ lootScene = ExtResource( 10 )
 
 [node name="DevConsole" parent="UIWrap" instance=ExtResource( 9 )]
 pause_mode = 2
-
-[node name="MetalBlock" parent="." instance=ExtResource( 16 )]
-position = Vector2( 128, 80 )
 [connection signal="command_inputted" from="UIWrap/DevConsole" to="." method="_on_DevConsole_command_inputted"]

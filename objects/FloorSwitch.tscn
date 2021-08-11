@@ -40,7 +40,7 @@ tracks/0/keys = {
 
 [node name="FloorSwitch" type="Area2D"]
 collision_layer = 0
-collision_mask = 1030
+collision_mask = 3078
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -53,6 +53,7 @@ position = Vector2( 0, 6 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "unpressed"
 anims/pressed = SubResource( 3 )
 anims/unpressed = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_FloorSwitch_body_entered"]
