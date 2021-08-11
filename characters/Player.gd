@@ -69,6 +69,8 @@ func applyDamage(damagingBody):
 	invincibleTimer.start()
 	knockbackVelocity = KNOCKBACK_AMOUNT
 	knockbackVelocity.x *= sign(position.x - damagingBody.position.x)
+	if position.y > damagingBody.position.y:
+		knockbackVelocity.y *= -1
 	
 	if !isInvincible:
 		hp -= damagingBody.damage
