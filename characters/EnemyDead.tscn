@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/images/enemies/walking-enemy.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/enemies/lovecraft-enemy.png" type="Texture" id=1]
 [ext_resource path="res://characters/EnemyDead.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -14,8 +14,8 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -4 )
 texture = ExtResource( 1 )
-hframes = 5
-frame = 4
+hframes = 3
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2, -4 )

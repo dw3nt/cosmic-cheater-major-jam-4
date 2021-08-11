@@ -21,8 +21,7 @@ func startTween():
 	
 	
 func _on_HeartPickUp_body_entered(body):
-	emit_signal("heart_pickup_collected")
-	queue_free()
+	emit_signal("heart_pickup_collected", self)
 
 
 func _on_Tween_tween_all_completed():

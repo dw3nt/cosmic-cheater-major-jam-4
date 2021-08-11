@@ -110,7 +110,11 @@ func _on_Coin_coin_collected():
 	updateCoins(1)
 	
 	
-func _on_HeartPickup_heart_pickup_collected():
+func _on_HeartPickup_heart_pickup_collected(area):
+	if player.hp >= player.maxHp:
+		return 
+		
+	area.queue_free()
 	player.hp += 1
 	levelUi.updateHearts(player.hp, player.maxHp)
 
