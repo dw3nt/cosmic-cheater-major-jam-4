@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/Wall.tscn" type="PackedScene" id=2]
@@ -12,9 +12,15 @@
 [ext_resource path="res://objects/HeartPickUp.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/Spike.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/Camera.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/MetalDoor.tscn" type="PackedScene" id=13]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 112 )
+
+[node name="Camera" parent="Player" instance=ExtResource( 12 )]
 
 [node name="WallWrap" type="Node2D" parent="."]
 
@@ -84,6 +90,42 @@ position = Vector2( 320, 64 )
 [node name="Wall29" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 320, 48 )
 
+[node name="Wall40" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 320, 48 )
+
+[node name="Wall41" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 16, 48 )
+
+[node name="Wall42" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 32, 48 )
+
+[node name="Wall43" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 48, 48 )
+
+[node name="Wall44" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 64, 32 )
+
+[node name="Wall45" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 0, 32 )
+
+[node name="Wall46" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 0, 16 )
+
+[node name="Wall47" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 64, 16 )
+
+[node name="Wall48" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Wall49" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+
+[node name="Wall52" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+
+[node name="Wall50" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 320, 32 )
+
 [node name="Wall17" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 192, 128 )
 
@@ -120,6 +162,9 @@ position = Vector2( 0, 96 )
 [node name="Wall39" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 0, 80 )
 
+[node name="Wall51" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 0, 80 )
+
 [node name="Wall7" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 112, 160 )
 
@@ -135,10 +180,8 @@ position = Vector2( 160, 160 )
 [node name="Wall11" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 176, 160 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, 112 )
-
-[node name="Camera" parent="Player" instance=ExtResource( 12 )]
+[node name="MetalDoor" parent="." instance=ExtResource( 13 )]
+position = Vector2( 257, 120 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 48, 96 )
@@ -152,18 +195,33 @@ holderNodePath = NodePath("../Player")
 position = Vector2( 128, 144 )
 
 [node name="Enemy2" parent="EnemyWrap" instance=ExtResource( 5 )]
-position = Vector2( 16, 112 )
+position = Vector2( 16, 128 )
+
+[node name="Enemy3" parent="EnemyWrap" instance=ExtResource( 5 )]
+position = Vector2( 16, 16 )
 
 [node name="SpikeWrap" type="Node2D" parent="."]
 
 [node name="Spike" parent="SpikeWrap" instance=ExtResource( 11 )]
-position = Vector2( 48, 144 )
+position = Vector2( 48, 176 )
 
 [node name="Spike2" parent="SpikeWrap" instance=ExtResource( 11 )]
-position = Vector2( 32, 144 )
+position = Vector2( 32, 176 )
 
 [node name="Spike3" parent="SpikeWrap" instance=ExtResource( 11 )]
-position = Vector2( 16, 144 )
+position = Vector2( 16, 176 )
+
+[node name="Spike4" parent="SpikeWrap" instance=ExtResource( 11 )]
+position = Vector2( 16, 64 )
+rotation = 3.14159
+
+[node name="Spike5" parent="SpikeWrap" instance=ExtResource( 11 )]
+position = Vector2( 48, 64 )
+rotation = 3.14159
+
+[node name="Spike6" parent="SpikeWrap" instance=ExtResource( 11 )]
+position = Vector2( 32, 64 )
+rotation = 3.14159
 
 [node name="CrateWrap" type="Node2D" parent="."]
 
