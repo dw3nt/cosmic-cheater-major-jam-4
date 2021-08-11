@@ -89,6 +89,7 @@ func _on_Gun_bullet_fired():
 	inst.global_position = gun.bulletSpawnPos.global_position
 	inst.moveDir = (get_global_mouse_position() - gun.global_position).normalized()
 	inst.damage = bulletDamage
+	inst.aimOffset = 5
 	bulletWrap.add_child(inst)
 	
 	camera.shakeCamera(1, 15.0)
