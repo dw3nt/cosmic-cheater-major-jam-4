@@ -59,7 +59,6 @@ func _on_Hurtbox_body_entered(body):
 	if !canBeHurt:
 		return
 	
-	damageAnim.play("damaged")
 	invincibleTimer.start()
 	
 	if !isInvincible:
@@ -73,6 +72,8 @@ func _on_Hurtbox_body_entered(body):
 		moveAnim.play("dead")
 		emit_signal("player_died")
 		isDead = true
+	else:
+		damageAnim.play("damaged")
 
 
 func _on_InviniclbeTimer_timeout():
