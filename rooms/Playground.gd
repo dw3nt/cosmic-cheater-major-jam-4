@@ -86,12 +86,12 @@ func _on_Root_size_changed():
 	
 func _on_Player_player_damaged():
 	levelUi.updateHearts(player.hp, player.maxHp)
-	camera.shakeCamera(3, 15.0)
+	camera.shakeCamera(4, 0.3)
 	
 	
 func _on_Player_player_died():
 	gun.queue_free()
-	camera.shakeCamera(6, 80.0)
+	camera.shakeCamera(6, 1.5)
 	
 
 func _on_Gun_bullet_fired():
@@ -103,11 +103,11 @@ func _on_Gun_bullet_fired():
 	inst.aimOffset = 5
 	bulletWrap.add_child(inst)
 	
-	camera.shakeCamera(1, 15.0)
+	camera.shakeCamera(2, 0.25)
 	
 	
 func _on_Enemy_enemy_died():
-	camera.shakeCamera(2, 15.0)
+	camera.shakeCamera(3, 0.25)
 	
 
 func _on_Crate_loot_spawned(loot):

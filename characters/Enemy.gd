@@ -2,28 +2,29 @@ extends KinematicBody2D
 
 signal enemy_died
 
-const WHITE_FLASH_SHADER = preload("res://shaders/WhiteFlash.tres")
 const ENEMEY_DEAD_SCENE = preload("res://characters/EnemyDead.tscn")
 
 export(float) var moveSpeed = 75
 export(float) var jumpForce = 200
 export(float) var gravity = 8
-export(int) var maxFlash = 3
 export(int) var maxHp = 2
 export(int) var damage = 1
 
 var velocity = Vector2.ZERO
 var moveDir = 0
-var flash = 0
-var hp = maxHp
+var hp
 
-onready var animation = $AnimationPlayer
+onready var moveAnim = $MovementAnimation
+onready var damageAnim = $DamageAnimation
 onready var sprite = $Sprite
 onready var forwardRay = $ForwardRay
+onready var flashTimer = $FlashTimer
+
 
 func _ready():
 	moveDir = sign(rand_range(-1, 1))
 	forwardRay.cast_to.x *= moveDir
+	hp = maxHp
 
 
 func _physics_process(delta):
@@ -39,24 +40,20 @@ func _physics_process(delta):
 		velocity.y = gravity
 	
 	if velocity.x != 0:
-		animation.play("run")
+		moveAnim.play("run")
 		
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
 	
-	move_and_slide(velocity, Vector2.UP)
-	
-	if flash > 0:
-		flash -= 1
-	else:
-		sprite.material = null		
+	move_and_slide(velocity, Vector2.UP)	
 
 
 func _on_Hurtbox_body_entered(body):
-	flash = maxFlash
-	sprite.material = WHITE_FLASH_SHADER
-	
 	hp -= body.damage
+	damageAnim.play("damaged")
+	flashTimer.start()
+	
+	print(hp)
 		
 	if hp <= 0:
 		var inst = ENEMEY_DEAD_SCENE.instance()
@@ -68,3 +65,7 @@ func _on_Hurtbox_body_entered(body):
 	
 	if body.is_in_group("bullet"):
 		body.queue_free()
+
+
+func _on_FlashTimer_timeout():
+	damageAnim.play("no_damage")
