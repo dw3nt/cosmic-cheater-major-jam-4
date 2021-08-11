@@ -236,4 +236,5 @@ anims/no_damage = SubResource( 8 )
 wait_time = 1.5
 one_shot = true
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_Hurtbox_body_exited"]
 [connection signal="timeout" from="InviniclbeTimer" to="." method="_on_InviniclbeTimer_timeout"]

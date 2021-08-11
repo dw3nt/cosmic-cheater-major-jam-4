@@ -16,6 +16,8 @@ var hp = maxHp
 var canBeHurt = true
 var isInvincible = false
 var isDead = false
+var damagingBodies = {}
+var damagingBodiesOrder = []
 
 onready var moveAnim = $MovementAnimation
 onready var damageAnim = $DamageAnimation
@@ -53,16 +55,16 @@ func _physics_process(delta):
 		sprite.flip_h = velocity.x < 0
 	
 	move_and_slide(velocity, Vector2.UP)
-
-
-func _on_Hurtbox_body_entered(body):
+	
+	
+func applyDamage(damagingBody):
 	if !canBeHurt:
 		return
 	
 	invincibleTimer.start()
 	
 	if !isInvincible:
-		hp -= body.damage
+		hp -= damagingBody.damage
 		
 	canBeHurt = false
 	emit_signal("player_damaged")
@@ -76,6 +78,22 @@ func _on_Hurtbox_body_entered(body):
 		damageAnim.play("damaged")
 
 
+func _on_Hurtbox_body_entered(body):
+	if !damagingBodies.has(body.name):
+		damagingBodies[body.name] = body
+		damagingBodiesOrder.append(body.name)
+		
+	applyDamage(body)
+		
+		
+func _on_Hurtbox_body_exited(body):
+	damagingBodies.erase(body.name)
+	damagingBodiesOrder.remove(damagingBodiesOrder.find(body.name))
+
+
 func _on_InviniclbeTimer_timeout():
 	canBeHurt = true
 	damageAnim.play("no_damage")
+	
+	if damagingBodies.size() > 0:
+		applyDamage(damagingBodies[damagingBodiesOrder[damagingBodiesOrder.size() - 1]])
