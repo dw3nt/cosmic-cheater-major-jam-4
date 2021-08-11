@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/Wall.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://objects/FloorSwitch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://objects/WoodDoor.tscn" type="PackedScene" id=15]
 [ext_resource path="res://objects/MetalBlock.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/PitDeathDetect.tscn" type="PackedScene" id=17]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource( 4 )
@@ -24,6 +25,7 @@ script = ExtResource( 4 )
 position = Vector2( 64, 112 )
 
 [node name="Camera" parent="Player" instance=ExtResource( 12 )]
+limit_bottom = 336
 
 [node name="WallWrap" type="Node2D" parent="."]
 
@@ -134,6 +136,10 @@ position = Vector2( 0, 0 )
 
 [node name="Wall50" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 320, 32 )
+
+[node name="Wall65" parent="WallWrap" instance=ExtResource( 2 )]
+position = Vector2( 0, 432 )
+scale = Vector2( 999, 1 )
 
 [node name="Wall60" parent="WallWrap" instance=ExtResource( 2 )]
 position = Vector2( 112, 96 )
@@ -293,4 +299,8 @@ lootScene = ExtResource( 10 )
 
 [node name="DevConsole" parent="UIWrap" instance=ExtResource( 9 )]
 pause_mode = 2
+
+[node name="PitDeathDetect" parent="." instance=ExtResource( 17 )]
+position = Vector2( 16, 336 )
+scale = Vector2( 999, 1 )
 [connection signal="command_inputted" from="UIWrap/DevConsole" to="." method="_on_DevConsole_command_inputted"]

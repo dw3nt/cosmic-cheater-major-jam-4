@@ -13,7 +13,6 @@ func _process(delta):
 
 func shakeCamera(magnitude, duration):
 	if shakeRemain < magnitude || shakeRemain <= 0:
-		print('shake')
 		shakeTimer.start(duration)
 		shakeMagnitude = magnitude
 		shakeRemain = shakeMagnitude

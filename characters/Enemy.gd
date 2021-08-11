@@ -52,8 +52,6 @@ func _on_Hurtbox_body_entered(body):
 	hp -= body.damage
 	damageAnim.play("damaged")
 	flashTimer.start()
-	
-	print(hp)
 		
 	if hp <= 0:
 		var inst = ENEMEY_DEAD_SCENE.instance()
