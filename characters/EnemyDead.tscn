@@ -8,7 +8,7 @@ extents = Vector2( 12, 4 )
 
 [node name="EnemyDead" type="KinematicBody2D"]
 z_index = -1
-collision_layer = 4
+collision_layer = 1024
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

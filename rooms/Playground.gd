@@ -68,6 +68,17 @@ func updateCoins(value):
 	coins += value
 	levelUi.updateCoins(coins)
 	
+	openMoneyDoors(coins)
+	
+	
+func openMoneyDoors(coins):
+	var moneyDoors = get_tree().get_nodes_in_group("money_door")
+	for index in range(moneyDoors.size()):
+		if coins >= moneyDoors[index].doorCost:
+			moneyDoors[index].isOpen = true
+		else:
+			moneyDoors[index].isOpen = false
+	
 	
 func _on_Root_size_changed():
 	setCustomCursor()
