@@ -3,15 +3,17 @@ extends KinematicBody2D
 signal player_damaged
 signal player_died
 
-const WHITE_FLASH_SHADER = preload("res://shaders/WhiteFlash.tres")
+const KNOCKBACK_AMOUNT = Vector2(120, -20)
 
 export(float) var moveSpeed = 150
 export(float) var jumpForce = 200
 export(float) var gravity = 8
+export(float) var friction = 10
 export(int) var maxHp = 3
 export(int) var maxFlash = 80
 
 var velocity = Vector2.ZERO
+var knockbackVelocity = Vector2.ZERO
 var hp = maxHp
 var canBeHurt = true
 var isInvincible = false
@@ -27,8 +29,8 @@ onready var hurtboxCollider = $Hurtbox/CollisionShape2D
 
 
 func _physics_process(delta):
-	velocity.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	velocity.x *= moveSpeed
+	var inputX = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	velocity.x = inputX * moveSpeed
 	
 	if isDead:
 		velocity.x = 0
@@ -53,6 +55,9 @@ func _physics_process(delta):
 		
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
+		
+	velocity += knockbackVelocity
+	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 10)
 	
 	move_and_slide(velocity, Vector2.UP)
 	
@@ -62,6 +67,8 @@ func applyDamage(damagingBody):
 		return
 	
 	invincibleTimer.start()
+	knockbackVelocity = KNOCKBACK_AMOUNT
+	knockbackVelocity.x *= sign(position.x - damagingBody.position.x)
 	
 	if !isInvincible:
 		hp -= damagingBody.damage
