@@ -10,7 +10,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-scene1 = "res://menus/Scene1.tscn"
+nextScene = "res://rooms/Playground.tscn"
 transition = "FadeInOut"
 
 [node name="Background" type="ColorRect" parent="."]
@@ -29,8 +29,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer"]
-margin_left = 395.0
-margin_top = 150.0
-margin_right = 629.0
-margin_bottom = 450.0
+margin_left = 43.0
+margin_right = 277.0
+margin_bottom = 300.0
 texture = ExtResource( 1 )

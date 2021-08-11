@@ -8,6 +8,8 @@ const CMD_EXE_SCRIPT = preload("res://scripts/CommandExecutioner.gd")
 const BULLET_SCENE = preload("res://weapon/Bullet.tscn")
 const COIN_SCENE = preload("res://objects/Coin.tscn")
 
+export(String, FILE, "*.tscn") var restartScene
+
 var cmdMgr = load("res://scripts/CommandManager.gd").new()
 var cmdExe
 
@@ -22,6 +24,8 @@ onready var enemyWrap = $EnemyWrap
 onready var crateWrap = $CrateWrap
 onready var levelUi = $UIWrap/LevelUi
 onready var devConsole = $UIWrap/DevConsole
+onready var deathMenu = $UIWrap/PlayerDeathMenu
+onready var deathMenuTimer = $DeathMenuTimer
 
 
 func _ready():
@@ -36,6 +40,7 @@ func _ready():
 	
 	levelUi.updateHearts(player.hp, player.maxHp)
 	levelUi.updateCoins(coins)
+	deathMenu.connect("restart_pressed", self, "_on_PlayerDeathMenu_restart_pressed")
 	
 	for index in range(enemyWrap.get_child_count()):
 		enemyWrap.get_child(index).connect("enemy_died", self, "_on_Enemy_enemy_died")
@@ -92,6 +97,11 @@ func _on_Player_player_damaged():
 func _on_Player_player_died():
 	gun.queue_free()
 	camera.shakeCamera(6, 1.5)
+	deathMenuTimer.start()
+	
+
+func _on_PlayerDeathMenu_restart_pressed():
+	emit_signal("room_change_requested", { "scene": restartScene, "transition": "SwipeToMiddle" })
 	
 
 func _on_Gun_bullet_fired():
@@ -133,3 +143,7 @@ func _on_HeartPickup_heart_pickup_collected(area):
 
 func _on_DevConsole_command_inputted(command, value):
 	cmdExe.call(cmdMgr.commandFunctionMap[command], value)
+
+
+func _on_DeathMenuTimer_timeout():
+	deathMenu.enter()
