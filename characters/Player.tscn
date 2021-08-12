@@ -7,10 +7,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 4, 10 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 resource_name = "dead"
 length = 0.1
 tracks/0/type = "value"
@@ -62,8 +62,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -16 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -114,8 +113,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "jump_down"
+[sub_resource type="Animation" id=13]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -130,8 +128,7 @@ tracks/0/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "jump_up"
+[sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -146,8 +143,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "run"
+[sub_resource type="Animation" id=7]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -163,7 +159,7 @@ tracks/0/keys = {
 "values": [ 1, 2 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=14]
 resource_name = "damaged"
 length = 0.2
 loop = true
@@ -180,8 +176,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 3 ), null ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "no_damage"
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material")
@@ -218,20 +213,20 @@ collision_mask = 516
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -10 )
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="MovementAnimation" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/dead = SubResource( 7 )
-anims/idle = SubResource( 2 )
-anims/jump_down = SubResource( 3 )
-anims/jump_up = SubResource( 4 )
-anims/run = SubResource( 5 )
+anims/dead = SubResource( 11 )
+anims/idle = SubResource( 12 )
+anims/jump_down = SubResource( 13 )
+anims/jump_up = SubResource( 6 )
+anims/run = SubResource( 7 )
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
 autoplay = "no_damage"
-anims/damaged = SubResource( 9 )
-anims/no_damage = SubResource( 8 )
+anims/damaged = SubResource( 14 )
+anims/no_damage = SubResource( 9 )
 
 [node name="InviniclbeTimer" type="Timer" parent="."]
 wait_time = 1.5

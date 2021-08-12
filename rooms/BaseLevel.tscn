@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://objects/Camera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/PlanetTiles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://menus/PlayerDeathMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world/SpaceParallaxBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/LevelUi.tscn" type="PackedScene" id=6]
+[ext_resource path="res://weapon/Gun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/DevConsole.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/PitDeathDetect.tscn" type="PackedScene" id=9]
+[ext_resource path="res://rooms/BaseLevel.gd" type="Script" id=10]
+[ext_resource path="res://rooms/LevelTransitioner.tscn" type="PackedScene" id=11]
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource( 10 )
+
+[node name="SpaceParallaxBackground" parent="." instance=ExtResource( 4 )]
+
+[node name="PlanetTiles" parent="." instance=ExtResource( 2 )]
+
+[node name="PitDeathDetect" parent="." instance=ExtResource( 9 )]
+position = Vector2( 0, 384 )
+scale = Vector2( 999, 1 )
+
+[node name="SwitchDoorWrap" type="Node2D" parent="."]
+
+[node name="CoinDoorWrap" type="Node2D" parent="."]
+
+[node name="SwitchWrap" type="Node2D" parent="."]
+
+[node name="BlockWrap" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+
+[node name="Camera" parent="Player" instance=ExtResource( 1 )]
+limit_bottom = 336
+
+[node name="Gun" parent="Player" instance=ExtResource( 7 )]
+position = Vector2( 16, -16 )
+holderNodePath = NodePath("../../BaseLevel/Player")
+
+[node name="BulletWrap" type="Node2D" parent="."]
+
+[node name="EnemyWrap" type="Node2D" parent="."]
+
+[node name="SpikeWrap" type="Node2D" parent="."]
+
+[node name="CrateWrap" type="Node2D" parent="."]
+
+[node name="UIWrap" type="CanvasLayer" parent="."]
+
+[node name="LevelUi" parent="UIWrap" instance=ExtResource( 6 )]
+visible = false
+
+[node name="DevConsole" parent="UIWrap" instance=ExtResource( 8 )]
+pause_mode = 2
+
+[node name="PlayerDeathMenu" parent="UIWrap" instance=ExtResource( 3 )]
+visible = false
+
+[node name="DeathMenuTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PreviousLevelTransitioner" parent="." groups=[
+"previous_level_transitioner",
+] instance=ExtResource( 11 )]
+
+[node name="SpawnPosition" type="Position2D" parent="PreviousLevelTransitioner"]
+
+[node name="NextLevelTransitioner" parent="." groups=[
+"next_level_transitioner",
+] instance=ExtResource( 11 )]
+
+[node name="SpawnPosition" type="Position2D" parent="NextLevelTransitioner"]
+[connection signal="command_inputted" from="UIWrap/DevConsole" to="." method="_on_DevConsole_command_inputted"]
+[connection signal="timeout" from="DeathMenuTimer" to="." method="_on_DeathMenuTimer_timeout"]
+[connection signal="level_change_requested" from="PreviousLevelTransitioner" to="." method="_on_LevelTransitioner_level_change_requested"]
+[connection signal="level_change_requested" from="NextLevelTransitioner" to="." method="_on_LevelTransitioner_level_change_requested"]

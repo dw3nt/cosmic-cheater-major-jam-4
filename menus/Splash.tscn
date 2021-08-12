@@ -10,7 +10,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-nextScene = "res://rooms/Playground.tscn"
+nextScene = "res://rooms/Level1.tscn"
 transition = "FadeInOut"
 
 [node name="Background" type="ColorRect" parent="."]

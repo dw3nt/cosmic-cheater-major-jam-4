@@ -18,7 +18,7 @@ var coins = 0
 
 onready var player = $Player
 onready var camera = $Player/Camera
-onready var gun = $Gun
+onready var gun = $Player/Gun
 onready var bulletWrap = $BulletWrap
 onready var enemyWrap = $EnemyWrap
 onready var crateWrap = $CrateWrap
@@ -29,10 +29,18 @@ onready var deathMenuTimer = $DeathMenuTimer
 
 
 func _ready():
+	if !restartScene:
+		restartScene = filename
+		
 	cmdExe = CMD_EXE_SCRIPT.new(self, player, gun, enemyWrap)
 	
 	get_tree().get_root().connect("size_changed", self, "_on_Root_size_changed")
 	setCustomCursor()
+	
+	if GameManager.playerSpawnLookUpNode:
+		player.global_position = get_node(GameManager.playerSpawnLookUpNode).global_position
+	else:
+		player.global_position = $PreviousLevelTransitioner/SpawnPosition.global_position
 	
 	player.connect("player_damaged", self, "_on_Player_player_damaged")
 	player.connect("player_died", self, "_on_Player_player_died")
@@ -101,7 +109,6 @@ func _on_Player_player_died():
 	
 
 func _on_PlayerDeathMenu_restart_pressed():
-	print('hey')
 	emit_signal("room_change_requested", { "scene": restartScene, "transition": "SwipeToMiddle" })
 	
 
@@ -148,3 +155,12 @@ func _on_DevConsole_command_inputted(command, value):
 
 func _on_DeathMenuTimer_timeout():
 	deathMenu.enter()
+
+
+func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
+	if transitioner.is_in_group("next_level_transitioner"):
+		GameManager.playerSpawnLookUpNode = NodePath("PreviousLevelTransitioner/SpawnPosition")
+	else:
+		GameManager.playerSpawnLookUpNode = NodePath("NextLevelTransitioner/SpawnPosition")
+		
+	emit_signal("room_change_requested", { "scene": nextScene, "transition": "SwipeToMiddle" })

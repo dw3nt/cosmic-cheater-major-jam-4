@@ -28,6 +28,10 @@ onready var sprite = $Sprite
 onready var hurtboxCollider = $Hurtbox/CollisionShape2D
 
 
+func _ready():
+	sprite.z_index = 0
+
+
 func _physics_process(delta):
 	var inputX = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = inputX * moveSpeed
@@ -83,6 +87,7 @@ func applyDamage(damagingBody):
 		moveAnim.play("dead")
 		emit_signal("player_died")
 		isDead = true
+		sprite.z_index = -10
 	else:
 		damageAnim.play("damaged")
 

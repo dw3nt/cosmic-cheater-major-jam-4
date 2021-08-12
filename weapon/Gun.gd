@@ -19,8 +19,8 @@ onready var bulletSpawnPos = $BulletSpawnPosition
 
 
 func _ready():
-	holder = get_node(holderNodePath)
-	holderLastPos = holder.position
+	holder = get_parent()
+	holderLastPos = holder.global_position
 
 
 func _process(delta):
@@ -31,10 +31,10 @@ func _process(delta):
 	
 	mousePos = get_global_mouse_position()
 	look_at(mousePos)
-	sprite.flip_v = mousePos.x < position.x
+	sprite.flip_v = mousePos.x < global_position.x
 	sprite.offset.x = -recoil
 	
-	position = holderLastPos + holdOffset
+	global_position = holderLastPos + holdOffset
 	
 	recoil = max(0, recoil - 1)
 	if Input.is_action_pressed("shoot") && canShoot:
@@ -47,7 +47,7 @@ func _process(delta):
 
 func _on_PositionUpdateTimer_timeout():
 	if holder != null:
-		holderLastPos = holder.position
+		holderLastPos = holder.global_position
 
 
 func _on_ShootCooldownTimer_timeout():

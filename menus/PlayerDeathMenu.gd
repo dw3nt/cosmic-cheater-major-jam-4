@@ -5,6 +5,10 @@ signal restart_pressed
 onready var animation = $AnimationPlayer
 
 
+func _ready():
+	visible = true
+
+
 func enter():
 	animation.play("fade_in")
 

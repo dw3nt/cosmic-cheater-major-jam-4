@@ -22,6 +22,10 @@ boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.027451, 0.164706, 0.4, 1 )
 config/icon="res://logo-icon-64.png"
 
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
 [display]
 
 window/size/width=320
