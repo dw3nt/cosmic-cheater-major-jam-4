@@ -22,6 +22,7 @@ onready var gun = $Player/Gun
 onready var bulletWrap = $BulletWrap
 onready var enemyWrap = $EnemyWrap
 onready var crateWrap = $CrateWrap
+onready var coinWrap = $CoinWrap
 onready var levelUi = $UIWrap/LevelUi
 onready var devConsole = $UIWrap/DevConsole
 onready var deathMenu = $UIWrap/PlayerDeathMenu
@@ -41,6 +42,8 @@ func _ready():
 		player.global_position = get_node(GameManager.playerSpawnLookUpNode).global_position
 	else:
 		player.global_position = $PreviousLevelTransitioner/SpawnPosition.global_position
+		
+	loadPlayerCheats()
 	
 	player.connect("player_damaged", self, "_on_Player_player_damaged")
 	player.connect("player_died", self, "_on_Player_player_died")
@@ -51,10 +54,18 @@ func _ready():
 	deathMenu.connect("restart_pressed", self, "_on_PlayerDeathMenu_restart_pressed")
 	
 	for index in range(enemyWrap.get_child_count()):
-		enemyWrap.get_child(index).connect("enemy_died", self, "_on_Enemy_enemy_died")
+		var currentEnemy = enemyWrap.get_child(index)
+		currentEnemy.connect("enemy_died", self, "_on_Enemy_enemy_died")
+		if GameManager.enemyGravity:
+			currentEnemy.gravity = GameManager.enemyGravity
 	
 	for index in range(crateWrap.get_child_count()):
 		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
+		
+	updateCoins(GameManager.playerCoinAmount)
+	
+	for index in range(coinWrap.get_child_count()):
+		coinWrap.get_child(index).connect("coin_collected", self, "_on_Coin_coin_collected")
 		
 	emit_signal("room_ready")
 	
@@ -75,6 +86,19 @@ func setCustomCursor():
 		
 	var aimCursor = load(aimCursorPath)
 	Input.set_custom_mouse_cursor(aimCursor, 0, hotspot)
+	
+	
+func loadPlayerCheats():
+	if GameManager.playerJump:
+		player.jumpForce = GameManager.playerJump
+		
+	if GameManager.playerGravity:
+		player.gravity = GameManager.playerGravity
+		
+	if GameManager.gunFireRate:
+		gun.shootCooldown = GameManager.gunFireRate
+		
+	player.isInvincible = GameManager.isGodMode
 	
 	
 func updateCoins(value):
@@ -117,7 +141,8 @@ func _on_Gun_bullet_fired():
 	inst.transform = gun.transform
 	inst.global_position = gun.bulletSpawnPos.global_position
 	inst.moveDir = (get_global_mouse_position() - gun.global_position).normalized()
-	inst.damage = bulletDamage
+	if GameManager.bulletDamage:
+		inst.damage = GameManager.bulletDamage
 	inst.aimOffset = 5
 	bulletWrap.add_child(inst)
 	
@@ -158,6 +183,7 @@ func _on_DeathMenuTimer_timeout():
 
 
 func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
+	GameManager.playerCoinAmount = coins
 	if transitioner.is_in_group("next_level_transitioner"):
 		GameManager.playerSpawnLookUpNode = NodePath("PreviousLevelTransitioner/SpawnPosition")
 	else:
