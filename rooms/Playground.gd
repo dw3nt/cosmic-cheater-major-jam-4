@@ -101,6 +101,7 @@ func _on_Player_player_died():
 	
 
 func _on_PlayerDeathMenu_restart_pressed():
+	print('hey')
 	emit_signal("room_change_requested", { "scene": restartScene, "transition": "SwipeToMiddle" })
 	
 

@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/images/objects/coin.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/dogicapixel.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=4]
-[ext_resource path="res://objects/WoodDoor.gd" type="Script" id=5]
+[ext_resource path="res://objects/CoinDoor.gd" type="Script" id=5]
 [ext_resource path="res://objects/coin_door_top_collider.tres" type="Shape2D" id=6]
 [ext_resource path="res://objects/coin_door_bottom_collider.tres" type="Shape2D" id=7]
 
