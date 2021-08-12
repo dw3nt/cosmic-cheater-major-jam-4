@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://characters/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://world/planet_tiles_blue.tres" type="TileSet" id=2]
+[ext_resource path="res://world/PlanetTiles.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapon/Gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/Playground.gd" type="Script" id=4]
 [ext_resource path="res://characters/Enemy.tscn" type="PackedScene" id=5]
@@ -26,36 +26,47 @@ restartScene = "res://rooms/Playground.tscn"
 
 [node name="SpaceParallaxBackground" parent="." instance=ExtResource( 19 )]
 
-[node name="PlanetTiles" type="TileMap" parent="."]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 16, 16 )
-collision_mask = 0
-format = 1
-tile_data = PoolIntArray( -1, 0, 262146, -65536, 0, 262148, -65532, 0, 262146, -65531, 0, 262148, 65535, 0, 131072, 0, 0, 196608, 4, 0, 131072, 5, 0, 196608, 131071, 0, 131072, 65536, 0, 196608, 65540, 0, 131072, 65541, 0, 196608, 65556, 0, 327682, 196607, 0, 327680, 131072, 0, 196614, 131073, 0, 262145, 131074, 0, 262145, 131075, 0, 262145, 131076, 0, 196613, 131077, 0, 262150, 131092, 0, 262144, 196622, 0, 327683, 196623, 0, 262145, 196624, 0, 262145, 196625, 0, 262145, 196626, 0, 262145, 196627, 0, 262145, 196628, 0, 196611, 327679, 0, 327682, 262164, 0, 262144, 393206, 0, 262146, 393207, 0, 262148, 393215, 0, 262144, 327686, 0, 327683, 327687, 0, 262145, 327688, 0, 262145, 327689, 0, 262145, 327690, 0, 262145, 327691, 0, 262149, 327700, 0, 262144, 458742, 0, 131072, 458743, 0, 196608, 458751, 0, 262144, 393227, 0, 327684, 393230, 0, 327683, 393231, 0, 262145, 393232, 0, 262145, 393233, 0, 262145, 393234, 0, 262145, 393235, 0, 262145, 393236, 0, 196611, 524278, 0, 131072, 524279, 0, 196608, 524287, 0, 262144, 458755, 0, 262147, 458756, 0, 327685, 458772, 0, 262144, 589814, 0, 131072, 589815, 0, 196608, 589823, 0, 262144, 524291, 0, 262144, 524297, 0, 262146, 524298, 0, 131076, 524299, 0, 131076, 524300, 0, 262148, 524308, 0, 262144, 655350, 0, 327680, 655351, 0, 262150, 655359, 0, 262144, 589827, 0, 262144, 589833, 0, 131072, 589834, 0, 327687, 589835, 0, 4, 589836, 0, 196614, 589837, 0, 262145, 589838, 0, 262145, 589839, 0, 262145, 589840, 0, 262145, 589841, 0, 262145, 589842, 0, 262145, 589843, 0, 262145, 589844, 0, 262151, 720895, 0, 327681, 655360, 0, 262145, 655361, 0, 262145, 655362, 0, 262145, 655363, 0, 196615, 655364, 0, 262145, 655365, 0, 262145, 655366, 0, 262145, 655367, 0, 262145, 655368, 0, 262145, 655369, 0, 196613, 655370, 0, 196612, 655371, 0, 262150 )
+[node name="PlanetTiles" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -65538, 0, 262146, -65537, 0, 262148, -131069, 0, 262146, -131068, 0, 262148, -2, 0, 131072, -1, 0, 196608, -65533, 0, 131072, -65532, 0, 196608, 65534, 0, 131072, 65535, 0, 196608, 3, 0, 131072, 4, 0, 196608, 131070, 0, 131072, 131071, 0, 196608, 65539, 0, 131072, 65540, 0, 196608, 196606, 0, 131072, 196607, 0, 6, 131072, 0, 262145, 131073, 0, 262145, 131074, 0, 262145, 131075, 0, 196613, 131076, 0, 262150, 262142, 0, 131072, 262143, 0, 196608, 196621, 0, 327683, 196622, 0, 262145, 196623, 0, 262145, 196624, 0, 262145, 196625, 0, 262145, 196626, 0, 262145, 196627, 0, 262145, 196628, 0, 262149, 327678, 0, 131072, 327679, 0, 196608, 262164, 0, 262144, 393214, 0, 131072, 393215, 0, 196608, 327687, 0, 327683, 327688, 0, 262145, 327689, 0, 262145, 327690, 0, 262145, 327691, 0, 327685, 327700, 0, 262144, 458750, 0, 131072, 458751, 0, 196608, 393229, 0, 327683, 393230, 0, 262145, 393231, 0, 262145, 393232, 0, 262145, 393233, 0, 262145, 393234, 0, 262145, 393235, 0, 262145, 393236, 0, 196611, 524286, 0, 131072, 524287, 0, 196608, 458755, 0, 262146, 458756, 0, 262148, 458772, 0, 262144, 589822, 0, 131072, 589823, 0, 196608, 524291, 0, 131072, 524292, 0, 196608, 524297, 0, 262146, 524298, 0, 131076, 524299, 0, 262148, 524308, 0, 262144, 655358, 0, 131072, 655359, 0, 196608, 589827, 0, 131072, 589828, 0, 2, 589829, 0, 131076, 589830, 0, 131076, 589831, 0, 131076, 589832, 0, 131076, 589833, 0, 1, 589834, 0, 327687, 589835, 0, 2, 589836, 0, 131076, 589837, 0, 131076, 589838, 0, 131076, 589839, 0, 131076, 589840, 0, 131076, 589841, 0, 131076, 589842, 0, 131076, 589843, 0, 131076, 589844, 0, 196610, 720894, 0, 327680, 720895, 0, 196614, 655360, 0, 262145, 655361, 0, 262145, 655362, 0, 262145, 655363, 0, 196613, 655364, 0, 196612, 655365, 0, 196612, 655366, 0, 196612, 655367, 0, 196612, 655368, 0, 196612, 655369, 0, 196612, 655370, 0, 196612, 655371, 0, 196612, 655372, 0, 196612, 655373, 0, 196612, 655374, 0, 196612, 655375, 0, 196612, 655376, 0, 196612, 655377, 0, 196612, 655378, 0, 196612, 655379, 0, 196612, 655380, 0, 262150 )
 
 [node name="PitDeathDetect" parent="." instance=ExtResource( 17 )]
 position = Vector2( 16, 336 )
 scale = Vector2( 999, 1 )
 
-[node name="MetalDoor" parent="." instance=ExtResource( 13 )]
+[node name="SwitchDoorWrap" type="Node2D" parent="."]
+
+[node name="MetalDoor" parent="SwitchDoorWrap" instance=ExtResource( 13 )]
 position = Vector2( 256, 128 )
 
-[node name="WoodDoor300" parent="." instance=ExtResource( 15 )]
+[node name="MetalDoor2" parent="SwitchDoorWrap" instance=ExtResource( 13 )]
+position = Vector2( 224, 128 )
+
+[node name="CoinDoorWrap" type="Node2D" parent="."]
+
+[node name="WoodDoor300" parent="CoinDoorWrap" instance=ExtResource( 15 )]
 position = Vector2( 272, 80 )
 doorCost = 300
 
-[node name="WoodDoor1" parent="." instance=ExtResource( 15 )]
+[node name="WoodDoor1" parent="CoinDoorWrap" instance=ExtResource( 15 )]
 position = Vector2( 240, 80 )
 doorCost = 1
 
-[node name="FloorSwitch" parent="." instance=ExtResource( 14 )]
-position = Vector2( 160, 64 )
-attachedDoorPath = NodePath("../MetalDoor")
+[node name="SwitchWrap" type="Node2D" parent="."]
 
-[node name="MetalBlock" parent="." instance=ExtResource( 16 )]
+[node name="FloorSwitch" parent="SwitchWrap" instance=ExtResource( 14 )]
+position = Vector2( 160, 64 )
+attachedDoorPath = NodePath("../../SwitchDoorWrap/MetalDoor")
+
+[node name="FloorSwitch2" parent="SwitchWrap" instance=ExtResource( 14 )]
+position = Vector2( 176, 112 )
+attachedDoorPath = NodePath("../../SwitchDoorWrap/MetalDoor2")
+
+[node name="BlockWrap" type="Node2D" parent="."]
+
+[node name="MetalBlock" parent="BlockWrap" instance=ExtResource( 16 )]
 position = Vector2( 128, 64 )
 
-[node name="MetalBlock2" parent="." instance=ExtResource( 16 )]
+[node name="MetalBlock2" parent="BlockWrap" instance=ExtResource( 16 )]
 position = Vector2( 160, 112 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
