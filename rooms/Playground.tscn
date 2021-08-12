@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://characters/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://world/Wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/planet_tiles_blue.tres" type="TileSet" id=2]
 [ext_resource path="res://weapon/Gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/Playground.gd" type="Script" id=4]
 [ext_resource path="res://characters/Enemy.tscn" type="PackedScene" id=5]
@@ -18,236 +18,51 @@
 [ext_resource path="res://objects/MetalBlock.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world/PitDeathDetect.tscn" type="PackedScene" id=17]
 [ext_resource path="res://menus/PlayerDeathMenu.tscn" type="PackedScene" id=18]
+[ext_resource path="res://world/SpaceParallaxBackground.tscn" type="PackedScene" id=19]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource( 4 )
 restartScene = "res://rooms/Playground.tscn"
 
+[node name="SpaceParallaxBackground" parent="." instance=ExtResource( 19 )]
+
+[node name="PlanetTiles" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -1, 0, 262146, -65536, 0, 262148, -65532, 0, 262146, -65531, 0, 262148, 65535, 0, 131072, 0, 0, 196608, 4, 0, 131072, 5, 0, 196608, 131071, 0, 131072, 65536, 0, 196608, 65540, 0, 131072, 65541, 0, 196608, 65556, 0, 327682, 196607, 0, 327680, 131072, 0, 196614, 131073, 0, 262145, 131074, 0, 262145, 131075, 0, 262145, 131076, 0, 196613, 131077, 0, 262150, 131092, 0, 262144, 196622, 0, 327683, 196623, 0, 262145, 196624, 0, 262145, 196625, 0, 262145, 196626, 0, 262145, 196627, 0, 262145, 196628, 0, 196611, 327679, 0, 327682, 262164, 0, 262144, 393206, 0, 262146, 393207, 0, 262148, 393215, 0, 262144, 327686, 0, 327683, 327687, 0, 262145, 327688, 0, 262145, 327689, 0, 262145, 327690, 0, 262145, 327691, 0, 262149, 327700, 0, 262144, 458742, 0, 131072, 458743, 0, 196608, 458751, 0, 262144, 393227, 0, 327684, 393230, 0, 327683, 393231, 0, 262145, 393232, 0, 262145, 393233, 0, 262145, 393234, 0, 262145, 393235, 0, 262145, 393236, 0, 196611, 524278, 0, 131072, 524279, 0, 196608, 524287, 0, 262144, 458755, 0, 262147, 458756, 0, 327685, 458772, 0, 262144, 589814, 0, 131072, 589815, 0, 196608, 589823, 0, 262144, 524291, 0, 262144, 524297, 0, 262146, 524298, 0, 131076, 524299, 0, 131076, 524300, 0, 262148, 524308, 0, 262144, 655350, 0, 327680, 655351, 0, 262150, 655359, 0, 262144, 589827, 0, 262144, 589833, 0, 131072, 589834, 0, 327687, 589835, 0, 4, 589836, 0, 196614, 589837, 0, 262145, 589838, 0, 262145, 589839, 0, 262145, 589840, 0, 262145, 589841, 0, 262145, 589842, 0, 262145, 589843, 0, 262145, 589844, 0, 262151, 720895, 0, 327681, 655360, 0, 262145, 655361, 0, 262145, 655362, 0, 262145, 655363, 0, 196615, 655364, 0, 262145, 655365, 0, 262145, 655366, 0, 262145, 655367, 0, 262145, 655368, 0, 262145, 655369, 0, 196613, 655370, 0, 196612, 655371, 0, 262150 )
+
 [node name="PitDeathDetect" parent="." instance=ExtResource( 17 )]
 position = Vector2( 16, 336 )
 scale = Vector2( 999, 1 )
+
+[node name="MetalDoor" parent="." instance=ExtResource( 13 )]
+position = Vector2( 256, 128 )
+
+[node name="WoodDoor300" parent="." instance=ExtResource( 15 )]
+position = Vector2( 272, 80 )
+doorCost = 300
+
+[node name="WoodDoor1" parent="." instance=ExtResource( 15 )]
+position = Vector2( 240, 80 )
+doorCost = 1
+
+[node name="FloorSwitch" parent="." instance=ExtResource( 14 )]
+position = Vector2( 160, 64 )
+attachedDoorPath = NodePath("../MetalDoor")
+
+[node name="MetalBlock" parent="." instance=ExtResource( 16 )]
+position = Vector2( 128, 64 )
+
+[node name="MetalBlock2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 160, 112 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 112 )
 
 [node name="Camera" parent="Player" instance=ExtResource( 12 )]
 limit_bottom = 336
-
-[node name="WallWrap" type="Node2D" parent="."]
-
-[node name="Wall" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 80, 160 )
-
-[node name="Wall2" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 64, 128 )
-
-[node name="Wall3" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 64, 144 )
-
-[node name="Wall4" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 208, 144 )
-
-[node name="Wall12" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 224, 144 )
-
-[node name="Wall13" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 240, 144 )
-
-[node name="Wall14" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 256, 144 )
-
-[node name="Wall15" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 272, 144 )
-
-[node name="Wall16" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 288, 144 )
-
-[node name="Wall18" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 304, 144 )
-
-[node name="Wall19" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 144 )
-
-[node name="Wall20" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 128 )
-
-[node name="Wall30" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 112 )
-
-[node name="Wall21" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 272, 96 )
-
-[node name="Wall22" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 256, 96 )
-
-[node name="Wall23" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 240, 96 )
-
-[node name="Wall24" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 288, 96 )
-
-[node name="Wall25" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 304, 96 )
-
-[node name="Wall26" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 96 )
-
-[node name="Wall27" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 80 )
-
-[node name="Wall28" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 64 )
-
-[node name="Wall29" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 48 )
-
-[node name="Wall40" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 48 )
-
-[node name="Wall41" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 16, 48 )
-
-[node name="Wall42" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 32, 48 )
-
-[node name="Wall43" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 48, 48 )
-
-[node name="Wall44" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 64, 32 )
-
-[node name="Wall45" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 32 )
-
-[node name="Wall46" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 16 )
-
-[node name="Wall53" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 16, 32 )
-
-[node name="Wall54" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 48, 32 )
-
-[node name="Wall47" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 64, 16 )
-
-[node name="Wall48" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 64, 0 )
-
-[node name="Wall49" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
-
-[node name="Wall52" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
-
-[node name="Wall50" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 320, 32 )
-
-[node name="Wall65" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 432 )
-scale = Vector2( 999, 1 )
-
-[node name="Wall60" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 112, 96 )
-
-[node name="Wall61" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 128, 96 )
-
-[node name="Wall62" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 144, 96 )
-
-[node name="Wall63" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 160, 96 )
-
-[node name="Wall64" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 176, 96 )
-
-[node name="Wall59" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 240, 48 )
-
-[node name="Wall55" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 304, 48 )
-
-[node name="Wall56" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 288, 48 )
-
-[node name="Wall57" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 272, 48 )
-
-[node name="Wall58" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 256, 48 )
-
-[node name="Wall17" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 192, 128 )
-
-[node name="Wall5" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 192, 144 )
-
-[node name="Wall6" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 96, 160 )
-
-[node name="Wall31" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 48, 160 )
-
-[node name="Wall32" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 32, 160 )
-
-[node name="Wall33" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 16, 160 )
-
-[node name="Wall34" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 160 )
-
-[node name="Wall35" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 144 )
-
-[node name="Wall36" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 128 )
-
-[node name="Wall37" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 112 )
-
-[node name="Wall38" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 96 )
-
-[node name="Wall39" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 80 )
-
-[node name="Wall51" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 0, 80 )
-
-[node name="Wall7" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 112, 160 )
-
-[node name="Wall8" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 128, 160 )
-
-[node name="Wall9" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 144, 160 )
-
-[node name="Wall10" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 160, 160 )
-
-[node name="Wall11" parent="WallWrap" instance=ExtResource( 2 )]
-position = Vector2( 176, 160 )
-
-[node name="WoodDoor300" parent="." instance=ExtResource( 15 )]
-position = Vector2( 263, 72 )
-doorCost = 300
-
-[node name="WoodDoor1" parent="." instance=ExtResource( 15 )]
-position = Vector2( 240, 72 )
-doorCost = 1
-
-[node name="MetalDoor" parent="." instance=ExtResource( 13 )]
-position = Vector2( 257, 120 )
-
-[node name="FloorSwitch" parent="." instance=ExtResource( 14 )]
-position = Vector2( 176, 80 )
-attachedDoorPath = NodePath("../MetalDoor")
-
-[node name="MetalBlock" parent="." instance=ExtResource( 16 )]
-position = Vector2( 128, 80 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 48, 96 )
@@ -269,13 +84,13 @@ position = Vector2( 16, 16 )
 [node name="SpikeWrap" type="Node2D" parent="."]
 
 [node name="Spike" parent="SpikeWrap" instance=ExtResource( 11 )]
-position = Vector2( 48, 144 )
-
-[node name="Spike2" parent="SpikeWrap" instance=ExtResource( 11 )]
 position = Vector2( 32, 144 )
 
-[node name="Spike3" parent="SpikeWrap" instance=ExtResource( 11 )]
+[node name="Spike2" parent="SpikeWrap" instance=ExtResource( 11 )]
 position = Vector2( 16, 144 )
+
+[node name="Spike3" parent="SpikeWrap" instance=ExtResource( 11 )]
+position = Vector2( 0, 144 )
 
 [node name="Spike4" parent="SpikeWrap" instance=ExtResource( 11 )]
 position = Vector2( 16, 64 )

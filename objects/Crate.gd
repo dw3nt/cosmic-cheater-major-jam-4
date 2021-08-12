@@ -2,6 +2,8 @@ extends Area2D
 
 signal loot_spawned
 
+const LOOT_SPAWN_OFFSET = Vector2(8, 8)
+
 export(int) var shardCount = 6
 export(float) var explodeVelocity = 15
 export(float) var explodeRotation = 0.25
@@ -57,7 +59,7 @@ func explode():
 
 func spawnLoot():
 	var inst = lootScene.instance()
-	inst.position = position
+	inst.position = position + LOOT_SPAWN_OFFSET
 	get_parent().call_deferred("add_child", inst)
 	call_deferred("emit_signal", "loot_spawned", inst)
 

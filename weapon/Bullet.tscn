@@ -52,7 +52,7 @@ autostart = true
 
 [node name="HitDetect" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 33
+collision_mask = 2081
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetect"]
 shape = SubResource( 3 )
