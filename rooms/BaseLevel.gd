@@ -49,6 +49,9 @@ func _ready():
 	player.connect("player_died", self, "_on_Player_player_died")
 	gun.connect("bullet_fired", self, "_on_Gun_bullet_fired")
 	
+	if GameManager.playerHp:
+		player.hp = GameManager.playerHp
+	
 	levelUi.updateHearts(player.hp, player.maxHp)
 	levelUi.updateCoins(coins)
 	deathMenu.connect("restart_pressed", self, "_on_PlayerDeathMenu_restart_pressed")
@@ -184,6 +187,8 @@ func _on_DeathMenuTimer_timeout():
 
 func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	GameManager.playerCoinAmount = coins
+	GameManager.playerHp = player.hp
+	
 	if transitioner.is_in_group("next_level_transitioner"):
 		GameManager.playerSpawnLookUpNode = NodePath("PreviousLevelTransitioner/SpawnPosition")
 	else:

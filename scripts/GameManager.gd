@@ -2,6 +2,9 @@ extends Node
 
 var playerSpawnLookUpNode = null
 
+var playerHp = null
+
+# cheat codes
 var playerJump = null
 var playerGravity = null
 var gunFireRate = null
