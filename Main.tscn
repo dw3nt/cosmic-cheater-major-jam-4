@@ -21,7 +21,6 @@ layer = 128
 visible = false
 
 [node name="SwipeToMiddle" parent="Transitions" instance=ExtResource( 4 )]
-visible = false
 
 [node name="MusicManager" type="Node" parent="."]
 

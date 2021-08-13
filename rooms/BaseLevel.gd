@@ -284,6 +284,7 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	saveFile.writeValue("playerHp", player.hp)
 	saveFile.writeValue("coins", GameManager.playerCoinAmount)
 	saveFile.writeValue("coinsCollected", GameManager.coinsCollected)
+	saveFile.writeValue("heartsCollected", GameManager.heartsCollected)
 	saveFile.writeValue("crateStates", GameManager.cratesLooted)
 	saveFile.writeValue("playerRoomSpawn", GameManager.playerSpawnLookUpNode)
 		

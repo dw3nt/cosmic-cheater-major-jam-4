@@ -34,7 +34,7 @@ func _ready():
 	currentMusic = audioStream1
 	nextMusic = audioStream2
 	
-	changeActiveTransition("SwipeToMiddle")
+	activeTransition = $Transitions/SwipeToMiddle
 	attachSignals(currentRoom)
 	
 
