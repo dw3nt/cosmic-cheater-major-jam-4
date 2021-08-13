@@ -1,0 +1,142 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/dogicapixel.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/BaseButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menus/ControlsMenu.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="ControlsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 24
+custom_constants/margin_top = 8
+custom_constants/margin_left = 24
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 296.0
+margin_bottom = 172.0
+custom_constants/separation = 20
+
+[node name="ControlTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 272.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 1 )
+text = "Controls"
+align = 1
+
+[node name="ControlsWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 272.0
+margin_bottom = 120.0
+custom_constants/separation = 32
+
+[node name="CombatWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ControlsWrap"]
+margin_right = 272.0
+margin_bottom = 50.0
+custom_constants/separation = 16
+
+[node name="MovementWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap"]
+margin_right = 272.0
+margin_bottom = 6.0
+alignment = 1
+
+[node name="MovementLabel" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap/MovementWrap"]
+margin_right = 130.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "Movement"
+
+[node name="MovementControls" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap/MovementWrap"]
+margin_left = 134.0
+margin_right = 272.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "W, A, S, D, / arrow keys"
+align = 2
+
+[node name="AimWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap"]
+margin_top = 22.0
+margin_right = 272.0
+margin_bottom = 28.0
+alignment = 1
+
+[node name="AimLabel" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap/AimWrap"]
+margin_right = 134.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "Aim"
+
+[node name="AimControls" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap/AimWrap"]
+margin_left = 138.0
+margin_right = 272.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "Mouse"
+align = 2
+
+[node name="ShootWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap"]
+margin_top = 44.0
+margin_right = 272.0
+margin_bottom = 50.0
+alignment = 1
+
+[node name="ShootLabel" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap/ShootWrap"]
+margin_right = 134.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "Shoot"
+
+[node name="ShootControls" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/CombatWrap/ShootWrap"]
+margin_left = 138.0
+margin_right = 272.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "Left mouse button"
+align = 2
+
+[node name="PauseWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ControlsWrap"]
+margin_top = 82.0
+margin_right = 272.0
+margin_bottom = 88.0
+alignment = 1
+
+[node name="PauseLabel" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/PauseWrap"]
+margin_right = 134.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "Pause"
+
+[node name="PauseControls" type="Label" parent="MarginContainer/VBoxContainer/ControlsWrap/PauseWrap"]
+margin_left = 138.0
+margin_right = 272.0
+margin_bottom = 6.0
+size_flags_horizontal = 3
+text = "P / Escape"
+align = 2
+
+[node name="Main Menu" parent="MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_left = 76.0
+margin_top = 140.0
+margin_right = 196.0
+margin_bottom = 158.0
+size_flags_horizontal = 4
+text = "Main Menu"
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Main Menu" to="." method="_on_Main_Menu_pressed"]

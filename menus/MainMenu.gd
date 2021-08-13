@@ -29,6 +29,14 @@ func _on_PlayButton_pressed():
 	emit_signal("room_change_requested", { "scene": levelPath, "transition": "SwipToMiddle" })
 	
 	
+func _on_ControlsButton_pressed():
+	animation.play("controls_slide_in")
+	
+	
+func _on_ControlsMenu_main_menu_pressed():
+	animation.play_backwards("controls_slide_in")
+	
+	
 func _on_SettingsButton_pressed():
 	animation.play("settings_slide_in")
 	

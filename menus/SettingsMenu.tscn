@@ -163,11 +163,11 @@ __meta__ = {
 
 [node name="ConfirmationPopUp" type="Control" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.0162938 )
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 181.986
-margin_bottom = 181.986
+margin_top = 185.0
+margin_bottom = 185.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -187,13 +187,13 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 20.0
 margin_right = 310.0
-margin_bottom = 160.0
+margin_bottom = 159.0
 
 [node name="Panel" type="Panel" parent="ConfirmationPopUp/MarginContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 293.0
-margin_bottom = 133.0
+margin_bottom = 132.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPopUp/MarginContainer/PanelContainer/Panel"]
 anchor_right = 1.0
