@@ -36,7 +36,6 @@ func _ready():
 		restartScene = filename
 		
 	loadSaveData()
-	loadSettingsData()
 		
 	cmdExe = CMD_EXE_SCRIPT.new(self, player, gun, enemyWrap)
 	
@@ -44,7 +43,9 @@ func _ready():
 	setCustomCursor()
 	
 	if GameManager.playerSpawnLookUpNode:
-		player.global_position = get_node(GameManager.playerSpawnLookUpNode).global_position
+		var spawnPosNode = get_node(GameManager.playerSpawnLookUpNode)
+		player.global_position = spawnPosNode.global_position
+		player.sprite.flip_h = spawnPosNode.global_position.x < spawnPosNode.get_parent().global_position.x
 	else:
 		player.global_position = $PreviousLevelTransitioner/SpawnPosition.global_position
 		
@@ -76,16 +77,6 @@ func _ready():
 		coinWrap.get_child(index).connect("coin_collected", self, "_on_Coin_coin_collected")
 		
 	emit_signal("room_ready")
-	
-	
-func loadSettingsData():
-	var cameraShake = settingsFile.readValue("camera_shake")
-	if cameraShake != null:
-		GameManager.cameraShakeEnabled = cameraShake
-		
-	var devConsole = settingsFile.readValue("dev_console")
-	if devConsole != null:
-		GameManager.devConsoleEnabled = devConsole
 	
 	
 func loadSaveData():

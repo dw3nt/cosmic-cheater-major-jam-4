@@ -145,7 +145,7 @@ margin_right = 184.0
 margin_bottom = 82.0
 text = "Clear Save Data"
 
-[node name="MainMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="PreviousMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 134.0
 margin_right = 184.0
 margin_bottom = 152.0
@@ -239,6 +239,6 @@ anims/slide_in_confirmation = SubResource( 2 )
 [connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsWrap/ClearSaveButton" to="." method="_on_ClearSaveButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PreviousMenuButton" to="." method="_on_PreviousMenuButton_pressed"]
 [connection signal="pressed" from="ConfirmationPopUp/MarginContainer/PanelContainer/Panel/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="pressed" from="ConfirmationPopUp/MarginContainer/PanelContainer/Panel/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]

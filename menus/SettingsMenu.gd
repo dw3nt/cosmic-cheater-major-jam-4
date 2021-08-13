@@ -1,7 +1,10 @@
 extends Control
 
-signal main_menu_pressed
+signal previous_menu_pressed
 
+export(String) var previousButtonText = "Main Menu"
+
+onready var previousMenuButton = $MarginContainer/VBoxContainer/PreviousMenuButton
 onready var animation = $AnimationPlayer
 onready var cameraShakeCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox
 onready var devConsoleCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox
@@ -19,10 +22,23 @@ func _ready():
 	var devConsoleOption = settingsFile.readValue("dev_console")
 	if devConsoleOption != null:
 		devConsoleCheckbox.pressed = devConsoleOption
+		
+	previousMenuButton.text = previousButtonText
+	
+	
+func loadSettingsData():
+	var cameraShake = settingsFile.readValue("camera_shake")
+	if cameraShake != null:
+		GameManager.cameraShakeEnabled = cameraShake
+		
+	var devConsole = settingsFile.readValue("dev_console")
+	if devConsole != null:
+		GameManager.devConsoleEnabled = devConsole
 
 
-func _on_MainMenuButton_pressed():
-	emit_signal("main_menu_pressed")
+func _on_PreviousMenuButton_pressed():
+	emit_signal("previous_menu_pressed")
+	loadSettingsData()
 
 
 func _on_ClearSaveButton_pressed():

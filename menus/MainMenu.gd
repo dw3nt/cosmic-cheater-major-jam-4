@@ -33,8 +33,16 @@ func _on_SettingsButton_pressed():
 	animation.play("settings_slide_in")
 	
 
-func _on_SettingsMenu_main_menu_pressed():
+func _on_SettingsMenu_previous_menu_pressed():
 	animation.play_backwards("settings_slide_in")
+	
+	
+func _on_CreditsButton_pressed():
+	animation.play("credits_slide_in")
+	
+	
+func _on_CreditsMenu_main_menu_pressed():
+	animation.play_backwards("credits_slide_in")
 
 
 func _on_QuitButton_pressed():
