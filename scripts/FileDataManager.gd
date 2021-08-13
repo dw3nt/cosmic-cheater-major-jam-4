@@ -1,3 +1,5 @@
+class_name FileDataManager
+
 var filePath = null
 var file = File.new()
 

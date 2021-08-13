@@ -12,6 +12,7 @@ export(String, FILE, "*.tscn") var restartScene
 
 var cmdMgr = load("res://scripts/CommandManager.gd").new()
 var cmdExe
+var saveFile = FileDataManager.new("user://save_data.data")
 
 var bulletDamage = 1
 var coins = 0
@@ -32,6 +33,8 @@ onready var deathMenuTimer = $DeathMenuTimer
 func _ready():
 	if !restartScene:
 		restartScene = filename
+		
+	loadSaveData()
 		
 	cmdExe = CMD_EXE_SCRIPT.new(self, player, gun, enemyWrap)
 	
@@ -71,6 +74,21 @@ func _ready():
 		coinWrap.get_child(index).connect("coin_collected", self, "_on_Coin_coin_collected")
 		
 	emit_signal("room_ready")
+	
+	
+func loadSaveData():
+	var playerHp = saveFile.readValue("playerHp")
+	if playerHp:
+		GameManager.playerHp = playerHp
+		
+	var playerCoins = saveFile.readValue("coins")
+	if playerCoins:
+		GameManager.playerCoinAmount = playerCoins
+		
+	var roomSpawnPos = saveFile.readValue("playerRoomSpawn")
+	if roomSpawnPos:
+		GameManager.playerSpawnLookUpNode = roomSpawnPos
+		
 	
 	
 func setCustomCursor():
@@ -186,14 +204,20 @@ func _on_DeathMenuTimer_timeout():
 
 
 func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
-	player.canAcceptInput = false
-	
 	GameManager.playerCoinAmount = coins
 	GameManager.playerHp = player.hp
+	
+	player.canAcceptInput = false
 	
 	if transitioner.is_in_group("next_level_transitioner"):
 		GameManager.playerSpawnLookUpNode = NodePath("PreviousLevelTransitioner/SpawnPosition")
 	else:
 		GameManager.playerSpawnLookUpNode = NodePath("NextLevelTransitioner/SpawnPosition")
+		
+		
+	saveFile.writeValue("levelPath", nextScene)
+	saveFile.writeValue("playerHp", player.hp)
+	saveFile.writeValue("coins", GameManager.playerCoinAmount)
+	saveFile.writeValue("playerRoomSpawn", GameManager.playerSpawnLookUpNode)
 		
 	emit_signal("room_change_requested", { "scene": nextScene, "transition": "SwipeToMiddle" })

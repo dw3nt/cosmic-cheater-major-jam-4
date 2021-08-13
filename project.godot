@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "FileDataManager",
+"language": "GDScript",
+"path": "res://scripts/FileDataManager.gd"
+} ]
 _global_script_class_icons={
-
+"FileDataManager": ""
 }
 
 [application]
