@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/BaseButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/dogicapixel.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://menus/SettingsMenu.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/ui_select.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -236,7 +237,13 @@ text = "Yes"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/slide_in_confirmation = SubResource( 2 )
+
+[node name="ClickAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -15.0
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_toggled"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsWrap/ClearSaveButton" to="." method="_on_ClearSaveButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PreviousMenuButton" to="." method="_on_PreviousMenuButton_pressed"]

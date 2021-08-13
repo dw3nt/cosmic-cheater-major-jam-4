@@ -8,6 +8,7 @@ onready var previousMenuButton = $MarginContainer/VBoxContainer/PreviousMenuButt
 onready var animation = $AnimationPlayer
 onready var cameraShakeCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox
 onready var devConsoleCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox
+onready var clickAudio = $ClickAudio
 
 var settingsFile
 
@@ -49,7 +50,21 @@ func _on_ConfirmButton_pressed():
 
 func _on_CameraShakeCheckBox_toggled(button_pressed):
 	settingsFile.writeValue("camera_shake", button_pressed)
+	clickAudio.pitch_scale = 0.5
+	clickAudio.play()
 
 
 func _on_DevConsoleCheckBox_toggled(button_pressed):
 	settingsFile.writeValue("dev_console", button_pressed)
+	clickAudio.pitch_scale = 0.5
+	clickAudio.play()
+
+
+func _on_CameraShakeCheckBox_mouse_entered():
+	clickAudio.pitch_scale = 1.0
+	clickAudio.play()
+
+
+func _on_DevConsoleCheckBox_mouse_entered():
+	clickAudio.pitch_scale = 1.0
+	clickAudio.play()

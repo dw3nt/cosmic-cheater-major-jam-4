@@ -1,9 +1,19 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sounds/ui_select.wav" type="AudioStream" id=1]
+[ext_resource path="res://ui/BaseButton.gd" type="Script" id=2]
 
 [node name="PlayButton" type="Button"]
 margin_right = 304.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 18 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ClickAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -15.0
+[connection signal="mouse_entered" from="." to="." method="_on_PlayButton_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_PlayButton_pressed"]
