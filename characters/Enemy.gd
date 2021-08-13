@@ -19,6 +19,7 @@ onready var damageAnim = $DamageAnimation
 onready var sprite = $Sprite
 onready var forwardRay = $ForwardRay
 onready var flashTimer = $FlashTimer
+onready var hurtAudio = $HurtAudio
 
 
 func _ready():
@@ -60,6 +61,8 @@ func _on_Hurtbox_body_entered(body):
 		get_parent().call_deferred("add_child", inst)
 		emit_signal("enemy_died")
 		queue_free()
+	else:
+		hurtAudio.play()
 	
 	if body.is_in_group("bullet"):
 		body.queue_free()
