@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/heal_pickup.wav-54de3df623c9b69febb1dcb599c9482c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/heal_pickup.wav"
+dest_files=[ "res://.import/heal_pickup.wav-54de3df623c9b69febb1dcb599c9482c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

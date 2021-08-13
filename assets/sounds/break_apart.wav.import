@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/break_apart.wav-8e945b04a1cb9c3bd46c66f75b23c6cb.sample"
+
+[deps]
+
+source_file="res://assets/sounds/break_apart.wav"
+dest_files=[ "res://.import/break_apart.wav-8e945b04a1cb9c3bd46c66f75b23c6cb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

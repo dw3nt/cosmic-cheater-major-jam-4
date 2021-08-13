@@ -22,12 +22,18 @@ var damagingBodies = {}
 var damagingBodiesOrder = []
 var canAcceptInput = true
 var inputX = 0
+var wasOnFloor = true
 
 onready var moveAnim = $MovementAnimation
 onready var damageAnim = $DamageAnimation
 onready var invincibleTimer = $InviniclbeTimer
 onready var sprite = $Sprite
 onready var hurtboxCollider = $Hurtbox/CollisionShape2D
+onready var runningAudioTimer = $RunningAudio/RunTimer
+onready var runningAudio = $RunningAudio
+onready var jumpAudio = $JumpAudio
+onready var hurtAudio = $HurtAudio
+onready var deathAudio = $DeathAudio
 
 
 func _ready():
@@ -45,11 +51,24 @@ func _physics_process(delta):
 	
 	if !is_on_floor():
 		velocity.y += gravity
+		runningAudio.stop()
+		runningAudioTimer.stop()
 	else:
+		if velocity.x != 0:
+			if runningAudioTimer.is_stopped():
+				runningAudioTimer.start()
+				runningAudio.play()
+		else:
+			runningAudio.stop()
+			runningAudioTimer.stop()
+		
 		if Input.is_action_just_pressed("jump") && !isDead && canAcceptInput:
 			velocity.y = -jumpForce
+			jumpAudio.play()
 		else:
 			velocity.y = gravity
+			if !wasOnFloor && is_on_floor():
+				runningAudio.play()
 		
 	if !isDead:	
 		if velocity.y < 0:
@@ -63,10 +82,12 @@ func _physics_process(delta):
 		
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
+			
 		
 	velocity += knockbackVelocity
 	knockbackVelocity = knockbackVelocity.move_toward(Vector2.ZERO, 10)
 	
+	wasOnFloor = is_on_floor()
 	move_and_slide(velocity, Vector2.UP)
 	
 	
@@ -89,11 +110,13 @@ func applyDamage(damagingBody):
 	if hp <= 0:
 		hurtboxCollider.set_deferred("disabled", true)
 		moveAnim.play("dead")
+		deathAudio.play()
 		emit_signal("player_died")
 		isDead = true
 		sprite.z_index = -10
 	else:
 		damageAnim.play("damaged")
+		hurtAudio.play()
 
 
 func _on_Hurtbox_body_entered(body):
@@ -115,3 +138,7 @@ func _on_InviniclbeTimer_timeout():
 	
 	if damagingBodies.size() > 0:
 		applyDamage(damagingBodies[damagingBodiesOrder[damagingBodiesOrder.size() - 1]])
+
+
+func _on_RunTimer_timeout():
+	runningAudio.play()
