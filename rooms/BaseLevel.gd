@@ -247,7 +247,6 @@ func _on_HeartPickup_heart_pickup_collected(area):
 	if area.cratePath:
 		crateStates[area.cratePath] = CrateStates.States.LOOTED
 		
-	area.queue_free()
 	player.hp += 1
 	levelUi.updateHearts(player.hp, player.maxHp)
 

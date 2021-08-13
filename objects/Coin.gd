@@ -9,6 +9,8 @@ var tweenValues = [ Vector2(0, -2), Vector2(0, 2) ]
 var cratePath = null
 
 onready var tween = $Tween
+onready var collider = $CollisionShape2D
+onready var collectedAudio = $CollectedAudio
 
 
 func _ready():
@@ -23,6 +25,10 @@ func startTween():
 
 func _on_Coin_body_entered(body):
 	emit_signal("coin_collected", self)
+	collectedAudio.play()
+	visible = false
+	collider.disabled = true
+	yield(collectedAudio, "finished")
 	queue_free()
 
 

@@ -16,6 +16,7 @@ onready var sprite = $Polygon2D
 onready var collider = $CollisionShape2D
 onready var animation = $AnimationPlayer
 onready var fadeDelayTimer = $FadeDelayTimer
+onready var destroyAudio = $DestroyAudio
 
 
 func _ready():
@@ -70,6 +71,7 @@ func _on_Crate_body_entered(body):
 	explode()
 	collider.set_deferred("disabled", true)
 	fadeDelayTimer.start()
+	destroyAudio.play()
 	
 	if lootScene:
 		spawnLoot()

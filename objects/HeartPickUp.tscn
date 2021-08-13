@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/images/ui/heart.png" type="Texture" id=1]
 [ext_resource path="res://objects/HeartPickUp.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/heal_pickup.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
@@ -21,5 +22,10 @@ hframes = 2
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="CollectedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -12.0
+pitch_scale = 0.9
 [connection signal="body_entered" from="." to="." method="_on_HeartPickUp_body_entered"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
