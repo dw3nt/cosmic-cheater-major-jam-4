@@ -20,6 +20,8 @@ var isInvincible = false
 var isDead = false
 var damagingBodies = {}
 var damagingBodiesOrder = []
+var canAcceptInput = true
+var inputX = 0
 
 onready var moveAnim = $MovementAnimation
 onready var damageAnim = $DamageAnimation
@@ -33,7 +35,9 @@ func _ready():
 
 
 func _physics_process(delta):
-	var inputX = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	if canAcceptInput && !isDead:
+		inputX = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		
 	velocity.x = inputX * moveSpeed
 	
 	if isDead:
@@ -42,7 +46,7 @@ func _physics_process(delta):
 	if !is_on_floor():
 		velocity.y += gravity
 	else:
-		if Input.is_action_just_pressed("jump") && !isDead:
+		if Input.is_action_just_pressed("jump") && !isDead && canAcceptInput:
 			velocity.y = -jumpForce
 		else:
 			velocity.y = gravity

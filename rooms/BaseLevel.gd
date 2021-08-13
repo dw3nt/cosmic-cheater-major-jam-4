@@ -186,6 +186,8 @@ func _on_DeathMenuTimer_timeout():
 
 
 func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
+	player.canAcceptInput = false
+	
 	GameManager.playerCoinAmount = coins
 	GameManager.playerHp = player.hp
 	
