@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="CosmicCheater-MajorJam4"
 run/main_scene="res://Main.tscn"
-boot_splash/image="res://assets/images/logo-circle-initials-233x300.png"
+boot_splash/image="res://assets/images/logo-initials-320x180.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.027451, 0.164706, 0.4, 1 )
 config/icon="res://logo-icon-64.png"
