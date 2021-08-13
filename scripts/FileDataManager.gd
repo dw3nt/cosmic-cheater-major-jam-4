@@ -24,6 +24,13 @@ func writeValue(key, value):
 	setFileData(data)
 	
 	
+func eraseFile():
+	file.close()
+	var directory = Directory.new()
+	directory.remove(filePath)
+	file = null
+	
+	
 func getFileData():
 	if file.file_exists(filePath):
 		file.open(filePath, File.READ)

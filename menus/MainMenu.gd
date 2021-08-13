@@ -7,6 +7,7 @@ const FIRST_LEVEL = "res://rooms/Level1.tscn"
 
 var saveFile
 
+onready var animation = $AnimationPlayer
 onready var playButton = $MarginContainer/VBoxContainer/ButtonsWrap/PlayButton
 
 
@@ -26,6 +27,14 @@ func _on_PlayButton_pressed():
 		levelPath = FIRST_LEVEL
 	
 	emit_signal("room_change_requested", { "scene": levelPath, "transition": "SwipToMiddle" })
+	
+	
+func _on_SettingsButton_pressed():
+	animation.play("settings_slide_in")
+	
+
+func _on_SettingsMenu_main_menu_pressed():
+	animation.play_backwards("settings_slide_in")
 
 
 func _on_QuitButton_pressed():

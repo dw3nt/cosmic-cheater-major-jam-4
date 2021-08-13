@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/dogicapixel.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/BaseButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://menus/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://menus/SettingsMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 4
@@ -18,6 +19,34 @@ outline_color = Color( 0.188235, 0.376471, 0.509804, 1 )
 extra_spacing_top = 8
 extra_spacing_bottom = 8
 font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "settings_slide_in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SettingsMenu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 325, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -325, 0 ) ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -93,5 +122,14 @@ margin_top = 66.0
 margin_right = 120.0
 margin_bottom = 84.0
 text = "Quit"
+
+[node name="SettingsMenu" parent="." instance=ExtResource( 5 )]
+margin_left = 325.0
+margin_right = 325.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/settings_slide_in = SubResource( 3 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsWrap/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsWrap/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsWrap/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="main_menu_pressed" from="SettingsMenu" to="." method="_on_SettingsMenu_main_menu_pressed"]
