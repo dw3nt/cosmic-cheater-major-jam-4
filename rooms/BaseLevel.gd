@@ -40,6 +40,8 @@ func _ready():
 		restartScene = filename
 		
 	loadSaveData()
+	var sl = SettingsLoader.new()
+	sl.loadSettingsData()
 		
 	cmdExe = CMD_EXE_SCRIPT.new(self, player, gun, enemyWrap)
 	

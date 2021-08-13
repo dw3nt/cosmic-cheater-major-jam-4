@@ -24,21 +24,13 @@ func _ready():
 		devConsoleCheckbox.pressed = devConsoleOption
 		
 	previousMenuButton.text = previousButtonText
-	
-	
-func loadSettingsData():
-	var cameraShake = settingsFile.readValue("camera_shake")
-	if cameraShake != null:
-		GameManager.cameraShakeEnabled = cameraShake
-		
-	var devConsole = settingsFile.readValue("dev_console")
-	if devConsole != null:
-		GameManager.devConsoleEnabled = devConsole
 
 
 func _on_PreviousMenuButton_pressed():
 	emit_signal("previous_menu_pressed")
-	loadSettingsData()
+	
+	var sl = SettingsLoader.new()
+	sl.loadSettingsData()
 
 
 func _on_ClearSaveButton_pressed():

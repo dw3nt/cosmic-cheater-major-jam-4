@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "FileDataManager",
 "language": "GDScript",
 "path": "res://scripts/FileDataManager.gd"
+}, {
+"base": "Node",
+"class": "SettingsLoader",
+"language": "GDScript",
+"path": "res://scripts/SettingsLoader.gd"
 } ]
 _global_script_class_icons={
 "CrateStates": "",
-"FileDataManager": ""
+"FileDataManager": "",
+"SettingsLoader": ""
 }
 
 [application]

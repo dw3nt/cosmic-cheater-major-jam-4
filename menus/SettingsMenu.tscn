@@ -187,7 +187,7 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 20.0
 margin_right = 310.0
-margin_bottom = 159.0
+margin_bottom = 160.0
 
 [node name="Panel" type="Panel" parent="ConfirmationPopUp/MarginContainer/PanelContainer"]
 margin_left = 7.0
