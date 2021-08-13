@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "CrateStates",
+"language": "GDScript",
+"path": "res://scripts/CrateStates.gd"
+}, {
 "base": "Reference",
 "class": "FileDataManager",
 "language": "GDScript",
 "path": "res://scripts/FileDataManager.gd"
 } ]
 _global_script_class_icons={
+"CrateStates": "",
 "FileDataManager": ""
 }
 

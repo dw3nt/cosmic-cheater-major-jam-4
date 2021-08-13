@@ -60,6 +60,7 @@ func explode():
 func spawnLoot():
 	var inst = lootScene.instance()
 	inst.position = position + LOOT_SPAWN_OFFSET
+	inst.cratePath = self.get_path()
 	get_parent().call_deferred("add_child", inst)
 	call_deferred("emit_signal", "loot_spawned", inst)
 

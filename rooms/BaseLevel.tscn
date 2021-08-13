@@ -47,6 +47,8 @@ holderNodePath = NodePath("../../BaseLevel/Player")
 
 [node name="SpikeWrap" type="Node2D" parent="."]
 
+[node name="HeartWrap" type="Node2D" parent="."]
+
 [node name="CoinWrap" type="Node2D" parent="."]
 
 [node name="CrateWrap" type="Node2D" parent="."]

@@ -6,6 +6,7 @@ export(float) var tweenDuration = 1.5
 
 var startPos = Vector2.ZERO
 var tweenValues = [ Vector2(0, -2), Vector2(0, 2) ]
+var cratePath = null
 
 onready var tween = $Tween
 

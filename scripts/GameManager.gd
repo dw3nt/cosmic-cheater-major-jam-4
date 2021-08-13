@@ -18,3 +18,6 @@ var enemyGravity = null
 var isGodMode = false
 
 var playerCoinAmount = 0
+var coinsCollected = {}
+var heartsCollected = {}
+var cratesLooted = {}

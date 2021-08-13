@@ -16,8 +16,10 @@ var cmdExe
 var saveFile = FileDataManager.new("user://save_data.data")
 var settingsFile = FileDataManager.new("user://settings_data.data")
 
-var bulletDamage = 1
 var coins = 0
+var coinsCollectedPaths = []
+var heartsCollectedPaths = []
+var crateStates = {}
 
 onready var player = $Player
 onready var camera = $Player/Camera
@@ -26,6 +28,7 @@ onready var bulletWrap = $BulletWrap
 onready var enemyWrap = $EnemyWrap
 onready var crateWrap = $CrateWrap
 onready var coinWrap = $CoinWrap
+onready var heartWrap = $HeartWrap
 onready var levelUi = $UIWrap/LevelUi
 onready var devConsole = $UIWrap/DevConsole
 onready var deathMenu = $UIWrap/PlayerDeathMenu
@@ -69,12 +72,31 @@ func _ready():
 			currentEnemy.gravity = GameManager.enemyGravity
 	
 	for index in range(crateWrap.get_child_count()):
-		crateWrap.get_child(index).connect("loot_spawned", self, "_on_Crate_loot_spawned")
+		var currentCrate = crateWrap.get_child(index)
+		currentCrate.connect("loot_spawned", self, "_on_Crate_loot_spawned")
+		if GameManager.cratesLooted.keys().has(filename) && GameManager.cratesLooted[filename].has(currentCrate.get_path()):
+			if GameManager.cratesLooted[filename][currentCrate.get_path()] == CrateStates.States.DESTROYED:
+				currentCrate.call_deferred("spawnLoot")
+				currentCrate.call_deferred("queue_free")
+			elif GameManager.cratesLooted[filename][currentCrate.get_path()] == CrateStates.States.LOOTED:
+				currentCrate.call_deferred("queue_free")
+		
 		
 	updateCoins(GameManager.playerCoinAmount)
 	
 	for index in range(coinWrap.get_child_count()):
-		coinWrap.get_child(index).connect("coin_collected", self, "_on_Coin_coin_collected")
+		var currentCoin = coinWrap.get_child(index)
+		if GameManager.coinsCollected.keys().has(filename) && GameManager.coinsCollected[filename].has(currentCoin.get_path()):
+			currentCoin.queue_free()
+		else:
+			currentCoin.connect("coin_collected", self, "_on_Coin_coin_collected")
+			
+	for index in range(heartWrap.get_child_count()):
+		var currentHeart = heartWrap.get_child(index)
+		if GameManager.heartsCollected.keys().has(filename) && GameManager.heartsCollected[filename].has(currentHeart.get_path()):
+			currentHeart.queue_free()
+		else:
+			currentHeart.connect("heart_pickup_collected", self, "_on_HeartPickup_heart_pickup_collected")
 		
 	emit_signal("room_ready")
 	
@@ -91,6 +113,18 @@ func loadSaveData():
 	var roomSpawnPos = saveFile.readValue("playerRoomSpawn")
 	if roomSpawnPos:
 		GameManager.playerSpawnLookUpNode = roomSpawnPos
+		
+	var coinsCollected = saveFile.readValue("coinsCollected")
+	if coinsCollected:
+		GameManager.coinsCollected = coinsCollected
+		
+	var heartsCollected = saveFile.readValue("heartsCollected")
+	if heartsCollected:
+		GameManager.heartsCollected = heartsCollected
+		
+	var levelCrateStates = saveFile.readValue("crateStates")
+	if levelCrateStates:
+		GameManager.cratesLooted = levelCrateStates
 		
 	
 	
@@ -186,6 +220,8 @@ func _on_Enemy_enemy_died():
 	
 
 func _on_Crate_loot_spawned(loot):
+	crateStates[loot.cratePath] = CrateStates.States.DESTROYED
+	
 	if loot.is_in_group("coin"):
 		loot.connect("coin_collected", self, "_on_Coin_coin_collected")
 		
@@ -193,13 +229,21 @@ func _on_Crate_loot_spawned(loot):
 		loot.connect("heart_pickup_collected", self, "_on_HeartPickup_heart_pickup_collected")
 		
 		
-func _on_Coin_coin_collected():
+func _on_Coin_coin_collected(coin):
+	coinsCollectedPaths.append(coin.get_path())
+	if coin.cratePath:
+		crateStates[coin.cratePath] = CrateStates.States.LOOTED
+		
 	updateCoins(1)
 	
 	
 func _on_HeartPickup_heart_pickup_collected(area):
 	if player.hp >= player.maxHp:
 		return 
+		
+	heartsCollectedPaths.append(area.get_path())
+	if area.cratePath:
+		crateStates[area.cratePath] = CrateStates.States.LOOTED
 		
 	area.queue_free()
 	player.hp += 1
@@ -216,6 +260,17 @@ func _on_DeathMenuTimer_timeout():
 
 func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	GameManager.playerCoinAmount = coins
+	if !GameManager.coinsCollected.has(filename):
+		GameManager.coinsCollected[filename] = []
+	GameManager.coinsCollected[filename] += coinsCollectedPaths
+	
+	if !GameManager.heartsCollected.has(filename):
+		GameManager.heartsCollected[filename] = []
+	GameManager.heartsCollected[filename] += heartsCollectedPaths
+	
+	for index in range(crateStates.keys().size()):
+		GameManager.cratesLooted[filename][crateStates.keys()[index]] = crateStates[crateStates.keys()[index]]
+		
 	GameManager.playerHp = player.hp
 	
 	player.canAcceptInput = false
@@ -225,10 +280,11 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	else:
 		GameManager.playerSpawnLookUpNode = NodePath("NextLevelTransitioner/SpawnPosition")
 		
-		
 	saveFile.writeValue("levelPath", nextScene)
 	saveFile.writeValue("playerHp", player.hp)
 	saveFile.writeValue("coins", GameManager.playerCoinAmount)
+	saveFile.writeValue("coinsCollected", GameManager.coinsCollected)
+	saveFile.writeValue("crateStates", GameManager.cratesLooted)
 	saveFile.writeValue("playerRoomSpawn", GameManager.playerSpawnLookUpNode)
 		
 	emit_signal("room_change_requested", { "scene": nextScene, "transition": "SwipeToMiddle" })
