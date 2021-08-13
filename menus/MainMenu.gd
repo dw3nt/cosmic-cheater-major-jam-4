@@ -7,6 +7,7 @@ const FIRST_LEVEL = "res://rooms/Level1.tscn"
 
 var saveFile
 
+onready var parallaxSpace = $SpaceParallaxBackground
 onready var animation = $AnimationPlayer
 onready var playButton = $MarginContainer/VBoxContainer/ButtonsWrap/PlayButton
 
@@ -18,6 +19,10 @@ func _ready():
 		playButton.text = "Continue"
 	
 	emit_signal("room_ready")
+	
+	
+func _physics_process(delta):
+	parallaxSpace.scroll_offset += Vector2(-70, 0) * delta
 
 
 func _on_PlayButton_pressed():

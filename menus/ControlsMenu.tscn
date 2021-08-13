@@ -129,7 +129,7 @@ margin_left = 138.0
 margin_right = 272.0
 margin_bottom = 6.0
 size_flags_horizontal = 3
-text = "P / Escape"
+text = "Escape"
 align = 2
 
 [node name="Main Menu" parent="MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
