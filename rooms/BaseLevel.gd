@@ -5,6 +5,7 @@ signal room_change_requested
 
 const CMD_EXE_SCRIPT = preload("res://scripts/CommandExecutioner.gd")
 
+const MAIN_MENU_SCENE = "res://menus/MainMenu.tscn"
 const BULLET_SCENE = preload("res://weapon/Bullet.tscn")
 const COIN_SCENE = preload("res://objects/Coin.tscn")
 
@@ -60,7 +61,6 @@ func _ready():
 	
 	levelUi.updateHearts(player.hp, player.maxHp)
 	levelUi.updateCoins(coins)
-	deathMenu.connect("restart_pressed", self, "_on_PlayerDeathMenu_restart_pressed")
 	
 	for index in range(enemyWrap.get_child_count()):
 		var currentEnemy = enemyWrap.get_child(index)
@@ -139,6 +139,10 @@ func openMoneyDoors(coins):
 			moneyDoors[index].isOpen = true
 		else:
 			moneyDoors[index].isOpen = false
+			
+			
+func restartLevel():
+	emit_signal("room_change_requested", { "scene": restartScene, "transition": "SwipeToMiddle" })
 	
 	
 func _on_Root_size_changed():
@@ -157,7 +161,11 @@ func _on_Player_player_died():
 	
 
 func _on_PlayerDeathMenu_restart_pressed():
-	emit_signal("room_change_requested", { "scene": restartScene, "transition": "SwipeToMiddle" })
+	restartLevel()
+	
+	
+func _on_PauseMenu_restart_pressed():
+	restartLevel()
 	
 
 func _on_Gun_bullet_fired():
@@ -224,3 +232,7 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	saveFile.writeValue("playerRoomSpawn", GameManager.playerSpawnLookUpNode)
 		
 	emit_signal("room_change_requested", { "scene": nextScene, "transition": "SwipeToMiddle" })
+
+
+func _on_PauseMenu_main_menu_pressed():
+	emit_signal("room_change_requested", { "scene": MAIN_MENU_SCENE, "transition": "SwipeToMiddle" })

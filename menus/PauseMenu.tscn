@@ -7,7 +7,8 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "settings_slide_in"
-length = 0.4
+length = 0.45
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("SettingsMenu:rect_position")
 tracks/0/interp = 1
@@ -31,6 +32,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -325, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -87,6 +100,7 @@ tracks/3/keys = {
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,8 +121,6 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -185.0
-margin_bottom = -185.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -186,14 +198,15 @@ text = "Quit Game"
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 3 )]
 margin_left = 325.0
-margin_top = -185.0
 margin_right = 325.0
-margin_bottom = -185.0
 previousButtonText = "Go Back"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/settings_slide_in = SubResource( 1 )
 anims/slide_in = SubResource( 2 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/VBoxContainer2/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/VBoxContainer2/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="previous_menu_pressed" from="SettingsMenu" to="." method="_on_SettingsMenu_previous_menu_pressed"]

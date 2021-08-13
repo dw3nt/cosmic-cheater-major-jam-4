@@ -77,6 +77,7 @@ func _on_CurrentRoom_room_change_requested(params = {}):
 	
 	activeTransition.playEntrance()
 	yield(activeTransition.animation, "animation_finished")
+	get_tree().paused = false
 	
 	roomWrap.remove_child(currentRoom)
 	currentRoom.queue_free()

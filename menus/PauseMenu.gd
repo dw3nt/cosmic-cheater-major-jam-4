@@ -1,12 +1,11 @@
 extends Control
 
+signal restart_pressed
+signal main_menu_pressed
+
 var isInSettings = false
 
 onready var animation = $AnimationPlayer
-
-
-func _ready():
-	visible = true
 	
 	
 func _input(event):
@@ -29,6 +28,10 @@ func togglePause():
 
 func _on_ResumeButton_pressed():
 	togglePause()
+	
+	
+func _on_RestartButton_pressed():
+	emit_signal("restart_pressed")
 
 
 func _on_SettingsButton_pressed():
@@ -39,3 +42,11 @@ func _on_SettingsButton_pressed():
 func _on_SettingsMenu_previous_menu_pressed():
 	animation.play_backwards("settings_slide_in")
 	isInSettings = false
+
+
+func _on_MainMenuButton_pressed():
+	emit_signal("main_menu_pressed")
+
+
+func _on_QuitButton_pressed():
+	get_tree().quit()
