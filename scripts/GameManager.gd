@@ -1,5 +1,8 @@
 extends Node
 
+var devConsoleEnabled = false
+var cameraShakeEnabled = true
+
 var playerSpawnLookUpNode = null
 
 var playerHp = null

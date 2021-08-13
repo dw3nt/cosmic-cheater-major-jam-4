@@ -11,7 +11,7 @@ onready var animation = $AnimationPlayer
 
 
 func _input(event):
-	if event.is_action_pressed("console") && canToggle:
+	if event.is_action_pressed("console") && canToggle && GameManager.devConsoleEnabled:
 		get_tree().paused = !get_tree().paused
 		toggleConsole()
 	

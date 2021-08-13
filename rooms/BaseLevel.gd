@@ -13,6 +13,7 @@ export(String, FILE, "*.tscn") var restartScene
 var cmdMgr = load("res://scripts/CommandManager.gd").new()
 var cmdExe
 var saveFile = FileDataManager.new("user://save_data.data")
+var settingsFile = FileDataManager.new("user://settings_data.data")
 
 var bulletDamage = 1
 var coins = 0
@@ -35,6 +36,7 @@ func _ready():
 		restartScene = filename
 		
 	loadSaveData()
+	loadSettingsData()
 		
 	cmdExe = CMD_EXE_SCRIPT.new(self, player, gun, enemyWrap)
 	
@@ -74,6 +76,16 @@ func _ready():
 		coinWrap.get_child(index).connect("coin_collected", self, "_on_Coin_coin_collected")
 		
 	emit_signal("room_ready")
+	
+	
+func loadSettingsData():
+	var cameraShake = settingsFile.readValue("camera_shake")
+	if cameraShake != null:
+		GameManager.cameraShakeEnabled = cameraShake
+		
+	var devConsole = settingsFile.readValue("dev_console")
+	if devConsole != null:
+		GameManager.devConsoleEnabled = devConsole
 	
 	
 func loadSaveData():

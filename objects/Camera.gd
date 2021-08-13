@@ -12,7 +12,7 @@ func _process(delta):
 	
 
 func shakeCamera(magnitude, duration):
-	if shakeRemain < magnitude || shakeRemain <= 0:
+	if (shakeRemain < magnitude || shakeRemain <= 0) && GameManager.cameraShakeEnabled:
 		shakeTimer.start(duration)
 		shakeMagnitude = magnitude
 		shakeRemain = shakeMagnitude
