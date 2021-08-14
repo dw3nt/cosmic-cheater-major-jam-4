@@ -60,7 +60,7 @@ anims/unpressed = SubResource( 3 )
 
 [node name="PressedAutio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
+volume_db = -12.0
 pitch_scale = 0.75
 [connection signal="body_entered" from="." to="." method="_on_FloorSwitch_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_FloorSwitch_body_exited"]

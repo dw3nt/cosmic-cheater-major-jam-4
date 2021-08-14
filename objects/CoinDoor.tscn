@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/images/objects/wood-door.png" type="Texture" id=1]
 [ext_resource path="res://assets/images/objects/coin.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://objects/CoinDoor.gd" type="Script" id=5]
 [ext_resource path="res://objects/coin_door_top_collider.tres" type="Shape2D" id=6]
 [ext_resource path="res://objects/coin_door_bottom_collider.tres" type="Shape2D" id=7]
+[ext_resource path="res://assets/sounds/door_open.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/door_close.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true
@@ -163,3 +165,12 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DoorOpenAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
+pitch_scale = 1.2
+
+[node name="DoorCloseAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0

@@ -7,6 +7,8 @@ onready var costLabel = $CostLabel
 onready var animation = $AnimationPlayer
 onready var topCollider = $TopCollider
 onready var bottomCollider = $BottomCollider
+onready var doorOpenAudio = $DoorOpenAudio
+onready var doorCloseAudio = $DoorCloseAudio
 
 
 func _ready():
@@ -23,8 +25,10 @@ func setIsOpen(val):
 	if val != isOpen:
 		if val:
 			animation.play("slide_open")
+			doorOpenAudio.play()
 		else:
 			animation.play_backwards("slide_open")
+			doorCloseAudio.play()
 			
 	isOpen = val
 	
