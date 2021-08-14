@@ -2,9 +2,11 @@ extends Control
 
 signal previous_menu_pressed
 
+export(bool) var showClearSaveButton = true
 export(String) var previousButtonText = "Main Menu"
 
 onready var previousMenuButton = $MarginContainer/VBoxContainer/PreviousMenuButton
+onready var clearSaveButton = $MarginContainer/VBoxContainer/OptionsWrap/ClearSaveButton
 onready var animation = $AnimationPlayer
 onready var cameraShakeCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox
 onready var devConsoleCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox
@@ -25,6 +27,15 @@ func _ready():
 		devConsoleCheckbox.pressed = devConsoleOption
 		
 	previousMenuButton.text = previousButtonText
+	
+	if showClearSaveButton:
+		clearSaveButton.disabled = false
+		clearSaveButton.modulate.a = 1
+		clearSaveButton.mouse_filter = MOUSE_FILTER_STOP
+	else:
+		clearSaveButton.disabled = true
+		clearSaveButton.modulate.a = 0
+		clearSaveButton.mouse_filter = MOUSE_FILTER_IGNORE
 
 
 func _on_PreviousMenuButton_pressed():
