@@ -12,6 +12,10 @@ onready var animation = $AnimationPlayer
 onready var playButton = $MarginContainer/VBoxContainer/ButtonsWrap/PlayButton
 
 
+func _init():
+	add_user_signal("music_change_requested")
+	
+
 func _ready():
 	saveFile = FileDataManager.new("user://save_data.data")
 	var hasPlayed = saveFile.readValue("hasPlayed")
@@ -19,6 +23,7 @@ func _ready():
 		playButton.text = "Continue"
 	
 	emit_signal("room_ready")
+	emit_signal("music_change_requested", "res://assets/sounds/menu_music.ogg")
 	
 	
 func _physics_process(delta):

@@ -35,6 +35,10 @@ onready var deathMenu = $UIWrap/PlayerDeathMenu
 onready var deathMenuTimer = $DeathMenuTimer
 
 
+func _init():
+	add_user_signal("music_change_requested")
+
+
 func _ready():
 	if !restartScene:
 		restartScene = filename
@@ -100,7 +104,9 @@ func _ready():
 		else:
 			currentHeart.connect("heart_pickup_collected", self, "_on_HeartPickup_heart_pickup_collected")
 		
+	yield(get_tree().create_timer(0.25), "timeout")
 	emit_signal("room_ready")
+	emit_signal("music_change_requested", "res://assets/sounds/game_music.ogg")
 	
 	
 func loadSaveData():

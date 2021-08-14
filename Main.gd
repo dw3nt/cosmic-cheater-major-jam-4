@@ -1,7 +1,7 @@
 extends Node
 
 const MIN_VOL_DB = -30.0
-const MAX_VOL_DB = 0.0
+const MAX_VOL_DB = -10.0
 const MUSIC_FADE_DURATION = 1.0
 
 const ROOM_SIGNALS = {
@@ -34,7 +34,7 @@ func _ready():
 	currentMusic = audioStream1
 	nextMusic = audioStream2
 	
-	activeTransition = $Transitions/SwipeToMiddle
+	activeTransition = $Transitions/FadeInOut
 	attachSignals(currentRoom)
 	
 
