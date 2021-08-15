@@ -14,6 +14,7 @@ onready var devConsoleCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/DevC
 onready var clickAudio = $ClickAudio
 
 var settingsFile
+var isReady = false
 
 
 func _ready():
@@ -37,6 +38,8 @@ func _ready():
 		clearSaveButton.disabled = true
 		clearSaveButton.modulate.a = 0
 		clearSaveButton.mouse_filter = MOUSE_FILTER_IGNORE
+		
+	isReady = true
 
 
 func _on_PreviousMenuButton_pressed():
@@ -64,14 +67,16 @@ func _on_ConfirmButton_pressed():
 
 func _on_CameraShakeCheckBox_toggled(button_pressed):
 	settingsFile.writeValue("camera_shake", button_pressed)
-	clickAudio.pitch_scale = 0.5
-	clickAudio.play()
+	if isReady:
+		clickAudio.pitch_scale = 0.5
+		clickAudio.play()
 
 
 func _on_DevConsoleCheckBox_toggled(button_pressed):
 	settingsFile.writeValue("dev_console", button_pressed)
-	clickAudio.pitch_scale = 0.5
-	clickAudio.play()
+	if isReady:
+		clickAudio.pitch_scale = 0.5
+		clickAudio.play()
 
 
 func _on_CameraShakeCheckBox_mouse_entered():
