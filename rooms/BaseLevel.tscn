@@ -35,7 +35,10 @@ scale = Vector2( 999, 1 )
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera" parent="Player" instance=ExtResource( 1 )]
+limit_left = -160
+limit_right = 544
 limit_bottom = 336
+offset_v = -0.5
 
 [node name="Gun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 16, -16 )
@@ -72,7 +75,8 @@ one_shot = true
 [node name="PreviousLevelTransitioner" parent="." groups=[
 "previous_level_transitioner",
 ] instance=ExtResource( 11 )]
-position = Vector2( -144, 0 )
+position = Vector2( -64, 0 )
+scale = Vector2( 1, 4 )
 
 [node name="SpawnPosition" type="Position2D" parent="PreviousLevelTransitioner"]
 position = Vector2( 64, 0 )
@@ -81,6 +85,7 @@ position = Vector2( 64, 0 )
 "next_level_transitioner",
 ] instance=ExtResource( 11 )]
 position = Vector2( 448, 0 )
+scale = Vector2( 1, 4 )
 
 [node name="SpawnPosition" type="Position2D" parent="NextLevelTransitioner"]
 position = Vector2( -64, 0 )

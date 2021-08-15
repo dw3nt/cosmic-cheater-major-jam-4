@@ -23,7 +23,6 @@ position = Vector2( 80, -80 )
 
 [node name="NextLevelTransitioner" parent="." index="17"]
 position = Vector2( 576, 0 )
-scale = Vector2( 1, 4 )
 transitionToScene = "res://rooms/Level2.tscn"
 
 [node name="SpawnPosition" parent="NextLevelTransitioner" index="1"]

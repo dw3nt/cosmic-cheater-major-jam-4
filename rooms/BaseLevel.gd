@@ -292,6 +292,7 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	
 	player.canAcceptInput = false
 	
+	print(transitioner.get_path())
 	if transitioner.is_in_group("next_level_transitioner"):
 		GameManager.playerSpawnLookUpNode = NodePath("PreviousLevelTransitioner/SpawnPosition")
 	else:

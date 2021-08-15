@@ -14,7 +14,6 @@ tile_data = PoolIntArray( -1179665, 0, 262146, -1179664, 0, 131076, -1179663, 0,
 position = Vector2( -16, -64 )
 
 [node name="Camera" parent="Player" index="10"]
-limit_left = -160
 limit_right = 528
 
 [node name="Enemy" parent="EnemyWrap" index="0" instance=ExtResource( 3 )]
@@ -50,8 +49,7 @@ position = Vector2( 256, -48 )
 
 [node name="PreviousLevelTransitioner" parent="." index="16"]
 position = Vector2( -80, -64 )
-scale = Vector2( 1, 4 )
 transitionToScene = "res://rooms/Level2.tscn"
 
 [node name="NextLevelTransitioner" parent="." index="17"]
-scale = Vector2( 1, 4 )
+transitionToScene = "res://rooms/Level4.tscn"
