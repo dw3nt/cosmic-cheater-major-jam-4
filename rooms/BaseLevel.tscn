@@ -73,6 +73,7 @@ visible = false
 [node name="DeathMenuTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="command_inputted" from="UIWrap/DevConsole" to="." method="_on_DevConsole_command_inputted"]
+[connection signal="player_death_menu_main_menu_pressed" from="UIWrap/PlayerDeathMenu" to="." method="_on_PlayerDeathMenu_player_death_menu_main_menu_pressed"]
 [connection signal="restart_pressed" from="UIWrap/PlayerDeathMenu" to="." method="_on_PlayerDeathMenu_restart_pressed"]
 [connection signal="main_menu_pressed" from="UIWrap/PauseMenu" to="." method="_on_PauseMenu_main_menu_pressed"]
 [connection signal="restart_pressed" from="UIWrap/PauseMenu" to="." method="_on_PauseMenu_restart_pressed"]

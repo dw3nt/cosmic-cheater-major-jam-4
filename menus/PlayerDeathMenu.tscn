@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://menus/PlayerDeathMenu.gd" type="Script" id=2]
+[ext_resource path="res://ui/BaseButton.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -70,6 +71,9 @@ custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 8.0
@@ -80,9 +84,9 @@ custom_constants/separation = 48
 alignment = 1
 
 [node name="TextWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 19.0
+margin_top = 16.0
 margin_right = 304.0
-margin_bottom = 25.0
+margin_bottom = 22.0
 
 [node name="TextLabel" type="Label" parent="MarginContainer/VBoxContainer/TextWrap"]
 margin_right = 304.0
@@ -92,35 +96,32 @@ align = 1
 
 [node name="ButtonWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_left = 88.0
-margin_top = 73.0
+margin_top = 70.0
 margin_right = 216.0
-margin_bottom = 145.0
+margin_bottom = 148.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 12
 
-[node name="RestartLevelButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonWrap"]
+[node name="RestartButton" parent="MarginContainer/VBoxContainer/ButtonWrap" instance=ExtResource( 3 )]
 margin_right = 128.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 0, 16 )
-text = "Restart Level"
+margin_bottom = 18.0
+text = "Restart"
 
-[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonWrap"]
-margin_top = 28.0
+[node name="MainMenuButton" parent="MarginContainer/VBoxContainer/ButtonWrap" instance=ExtResource( 3 )]
+margin_top = 30.0
 margin_right = 128.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 0, 16 )
+margin_bottom = 48.0
 text = "Main Menu"
 
-[node name="QuitGameButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonWrap"]
-margin_top = 56.0
+[node name="QuitButton" parent="MarginContainer/VBoxContainer/ButtonWrap" instance=ExtResource( 3 )]
+margin_top = 60.0
 margin_right = 128.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 0, 16 )
-text = "Quit Game"
+margin_bottom = 78.0
+text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade_in = SubResource( 1 )
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/RestartLevelButton" to="." method="_on_RestartLevelButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/QuitGameButton" to="." method="_on_QuitGameButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonWrap/QuitButton" to="." method="_on_QuitButton_pressed"]

@@ -308,3 +308,7 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 
 func _on_PauseMenu_main_menu_pressed():
 	emit_signal("room_change_requested", { "scene": MAIN_MENU_SCENE, "transition": "SwipeToMiddle" })
+
+
+func _on_PlayerDeathMenu_player_death_menu_main_menu_pressed():
+	emit_signal("room_change_requested", { "scene": MAIN_MENU_SCENE, "transition": "SwipeToMiddle" })

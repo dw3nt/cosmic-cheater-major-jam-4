@@ -1,5 +1,6 @@
 extends Control
 
+signal player_death_menu_main_menu_pressed
 signal restart_pressed
 
 onready var animation = $AnimationPlayer
@@ -11,15 +12,15 @@ func _ready():
 
 func enter():
 	animation.play("fade_in")
-
-
-func _on_RestartLevelButton_pressed():
+	
+	
+func _on_RestartButton_pressed():
 	emit_signal("restart_pressed")
-	
-	
+
+
 func _on_MainMenuButton_pressed():
-	pass # transition to main menu scene
+	emit_signal("player_death_menu_main_menu_pressed")
 
 
-func _on_QuitGameButton_pressed():
+func _on_QuitButton_pressed():
 	get_tree().quit()
