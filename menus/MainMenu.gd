@@ -3,7 +3,7 @@ extends Control
 signal room_ready
 signal room_change_requested
 
-const FIRST_LEVEL = "res://rooms/Level1.tscn"
+const LOADING_SCREEN_SCENE = "res://menus/LoadingScreen.tscn"
 
 var saveFile
 
@@ -31,12 +31,7 @@ func _physics_process(delta):
 
 
 func _on_PlayButton_pressed():
-	saveFile.writeValue("hasPlayed", true)
-	var levelPath = saveFile.readValue("levelPath")
-	if !levelPath:
-		levelPath = FIRST_LEVEL
-	
-	emit_signal("room_change_requested", { "scene": levelPath, "transition": "SwipToMiddle" })
+	emit_signal("room_change_requested", { "scene": LOADING_SCREEN_SCENE, "transition": "SwipToMiddle" })
 	
 	
 func _on_ControlsButton_pressed():
