@@ -21,3 +21,18 @@ var playerCoinAmount = 0
 var coinsCollected = {}
 var heartsCollected = {}
 var cratesLooted = {}
+
+
+func resetSaveData():
+	playerSpawnLookUpNode = null
+	playerHp = null
+	playerJump = null
+	playerGravity = null
+	gunFireRate = null
+	bulletDamage = null
+	enemyGravity = null
+	isGodMode = false
+	playerCoinAmount = 0
+	coinsCollected = {}
+	heartsCollected = {}
+	cratesLooted = {}

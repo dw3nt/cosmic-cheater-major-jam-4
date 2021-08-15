@@ -55,6 +55,10 @@ func _on_SettingsMenu_previous_menu_pressed():
 	animation.play_backwards("settings_slide_in")
 	
 	
+func _on_SettingsMenu_save_data_erased():
+	playButton.text = "Play"
+
+	
 func _on_CreditsButton_pressed():
 	animation.play("credits_slide_in")
 	

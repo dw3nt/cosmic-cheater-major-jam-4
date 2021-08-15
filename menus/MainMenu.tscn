@@ -213,5 +213,6 @@ anims/settings_slide_in = SubResource( 5 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsWrap/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsWrap/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="previous_menu_pressed" from="SettingsMenu" to="." method="_on_SettingsMenu_previous_menu_pressed"]
+[connection signal="save_data_erased" from="SettingsMenu" to="." method="_on_SettingsMenu_save_data_erased"]
 [connection signal="main_menu_pressed" from="CreditsMenu" to="." method="_on_CreditsMenu_main_menu_pressed"]
 [connection signal="main_menu_pressed" from="ControlsMenu" to="." method="_on_ControlsMenu_main_menu_pressed"]

@@ -1,6 +1,7 @@
 extends Control
 
 signal previous_menu_pressed
+signal save_data_erased
 
 export(bool) var showClearSaveButton = true
 export(String) var previousButtonText = "Main Menu"
@@ -57,6 +58,8 @@ func _on_ConfirmButton_pressed():
 	animation.play_backwards("slide_in_confirmation")
 	var saveFile = FileDataManager.new("user://save_data.data")
 	saveFile.eraseFile()
+	GameManager.resetSaveData()
+	emit_signal("save_data_erased")
 
 
 func _on_CameraShakeCheckBox_toggled(button_pressed):
