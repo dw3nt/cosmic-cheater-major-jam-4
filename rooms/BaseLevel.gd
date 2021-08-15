@@ -250,7 +250,7 @@ func _on_HeartPickup_heart_pickup_collected(area):
 		return
 		
 	area.visible = false
-	area.collider.disabled = true
+	area.collider.set_deferred("disabled", true)
 	area.collectedAudio.play()
 		
 	heartsCollectedPaths.append(area.get_path())
