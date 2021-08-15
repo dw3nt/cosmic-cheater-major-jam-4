@@ -14,7 +14,7 @@ export(int) var maxFlash = 80
 
 var velocity = Vector2.ZERO
 var knockbackVelocity = Vector2.ZERO
-var hp = maxHp
+var hp = 1
 var canBeHurt = true
 var isInvincible = false
 var isDead = false
