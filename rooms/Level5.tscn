@@ -34,6 +34,8 @@ position = Vector2( -64, 0 )
 [node name="Level7" parent="LevelTransitionWrap" index="3" instance=ExtResource( 3 )]
 position = Vector2( 512, 0 )
 scale = Vector2( 1, 2 )
+transitionToScene = "res://rooms/Level7.tscn"
+spawnNodeName = "Enter"
 
 [node name="SpawnPos" type="Position2D" parent="LevelTransitionWrap/Level7" index="1"]
 position = Vector2( -64, 0 )
@@ -44,6 +46,9 @@ tile_data = PoolIntArray( -1048589, 0, 262146, -1048588, 0, 131076, -1048587, 0,
 [node name="WoodDoor" parent="CoinDoorWrap" index="0" instance=ExtResource( 2 )]
 position = Vector2( -32, -96 )
 doorCost = 15
+
+[node name="Camera" parent="Player" index="10"]
+limit_top = -272
 [connection signal="level_change_requested" from="LevelTransitionWrap/Enter" to="." method="_on_LevelTransitioner_level_change_requested"]
 [connection signal="level_change_requested" from="LevelTransitionWrap/Exit" to="." method="_on_LevelTransitioner_level_change_requested"]
 [connection signal="level_change_requested" from="LevelTransitionWrap/Level6" to="." method="_on_LevelTransitioner_level_change_requested"]
