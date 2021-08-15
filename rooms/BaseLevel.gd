@@ -21,6 +21,7 @@ var coinsCollectedPaths = []
 var heartsCollectedPaths = []
 var crateStates = {}
 
+onready var levelTransWrap = $LevelTransitionWrap
 onready var player = $Player
 onready var camera = $Player/Camera
 onready var gun = $Player/Gun
@@ -57,7 +58,7 @@ func _ready():
 		player.global_position = spawnPosNode.global_position
 		player.sprite.flip_h = spawnPosNode.global_position.x < spawnPosNode.get_parent().global_position.x
 	else:
-		player.global_position = $PreviousLevelTransitioner/SpawnPosition.global_position
+		player.global_position = levelTransWrap.get_child(0).find_node("SpawnPos").global_position
 		
 	loadPlayerCheats()
 	
@@ -292,11 +293,7 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	
 	player.canAcceptInput = false
 	
-	print(transitioner.get_path())
-	if transitioner.is_in_group("next_level_transitioner"):
-		GameManager.playerSpawnLookUpNode = NodePath("PreviousLevelTransitioner/SpawnPosition")
-	else:
-		GameManager.playerSpawnLookUpNode = NodePath("NextLevelTransitioner/SpawnPosition")
+	GameManager.playerSpawnLookUpNode = NodePath("LevelTransitionWrap/" + transitioner.spawnNodeName + "/SpawnPos")
 		
 	saveFile.writeValue("levelPath", nextScene)
 	saveFile.writeValue("playerHp", player.hp)
