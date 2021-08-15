@@ -91,7 +91,6 @@ func _on_CurrentRoom_room_change_requested(params = {}):
 
 	
 func _on_CurrentRoom_music_change_requested(music):
-	print(music)
 	if music != currentMusicPath:
 		currentMusicPath = music
 		

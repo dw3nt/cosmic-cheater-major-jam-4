@@ -247,7 +247,11 @@ func _on_Coin_coin_collected(coin):
 	
 func _on_HeartPickup_heart_pickup_collected(area):
 	if player.hp >= player.maxHp:
-		return 
+		return
+		
+	area.visible = false
+	area.collider.disabled = true
+	area.collectedAudio.play()
 		
 	heartsCollectedPaths.append(area.get_path())
 	if area.cratePath:
@@ -255,6 +259,9 @@ func _on_HeartPickup_heart_pickup_collected(area):
 		
 	player.hp += 1
 	levelUi.updateHearts(player.hp, player.maxHp)
+	
+	yield(area.collectedAudio, "finished")
+	area.queue_free()
 
 
 func _on_DevConsole_command_inputted(command, value):
@@ -276,6 +283,9 @@ func _on_LevelTransitioner_level_change_requested(transitioner, nextScene):
 	GameManager.heartsCollected[filename] += heartsCollectedPaths
 	
 	for index in range(crateStates.keys().size()):
+		if !GameManager.cratesLooted.keys().has(filename):
+			GameManager.cratesLooted[filename] = {}	
+		
 		GameManager.cratesLooted[filename][crateStates.keys()[index]] = crateStates[crateStates.keys()[index]]
 		
 	GameManager.playerHp = player.hp
