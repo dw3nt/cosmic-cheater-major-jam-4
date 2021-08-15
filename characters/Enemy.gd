@@ -9,9 +9,9 @@ export(float) var jumpForce = 200
 export(float) var gravity = 8
 export(int) var maxHp = 2
 export(int) var damage = 1
+export(int) var moveDir = 0
 
 var velocity = Vector2.ZERO
-var moveDir = 0
 var hp
 
 onready var moveAnim = $MovementAnimation
@@ -23,7 +23,9 @@ onready var hurtAudio = $HurtAudio
 
 
 func _ready():
-	moveDir = sign(rand_range(-1, 1))
+	randomize()
+	if moveDir == 0:
+		moveDir = sign(rand_range(-1, 1))
 	forwardRay.cast_to.x *= moveDir
 	hp = maxHp
 

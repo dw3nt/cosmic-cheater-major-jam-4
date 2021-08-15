@@ -141,6 +141,7 @@ pause={
 2d_physics/layer_10="Spike"
 2d_physics/layer_11="EnemyDead"
 2d_physics/layer_12="Block"
+2d_physics/layer_13="LevelTransition"
 
 [rendering]
 
