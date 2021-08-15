@@ -27,7 +27,7 @@ func _on_Coin_body_entered(body):
 	emit_signal("coin_collected", self)
 	collectedAudio.play()
 	visible = false
-	collider.disabled = true
+	collider.set_deferred("disabled", true)
 	yield(collectedAudio, "finished")
 	queue_free()
 
