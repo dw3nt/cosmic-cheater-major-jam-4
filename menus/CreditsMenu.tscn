@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/BaseButton.tscn" type="PackedScene" id=2]
@@ -8,8 +8,11 @@
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "slide_in_confirmation"
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
 length = 0.3
 step = 0.05
 
@@ -26,48 +29,283 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 8
-custom_constants/margin_top = 8
+custom_constants/margin_top = 4
 custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 100.0
-margin_top = 8.0
-margin_right = 220.0
-margin_bottom = 172.0
+margin_left = 14.0
+margin_top = 4.0
+margin_right = 306.0
+margin_bottom = 176.0
 size_flags_horizontal = 4
-custom_constants/separation = 20
+custom_constants/separation = 8
+alignment = 1
 
 [node name="CreditsMenuTitle" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_right = 120.0
-margin_bottom = 12.0
+margin_top = 3.0
+margin_right = 292.0
+margin_bottom = 15.0
 custom_fonts/font = SubResource( 1 )
 text = "Credits"
 align = 1
 
-[node name="OptionsWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 32.0
-margin_right = 120.0
-margin_bottom = 56.0
-size_flags_horizontal = 3
+[node name="CreditsWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 23.0
+margin_right = 292.0
+margin_bottom = 143.0
+size_flags_horizontal = 2
+alignment = 1
+
+[node name="MusicCreditWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap"]
+margin_right = 292.0
+margin_bottom = 58.0
+size_flags_horizontal = 2
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicTitle" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap"]
+margin_right = 292.0
+margin_bottom = 6.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 2 )
+text = "Music"
+align = 1
+autowrap = true
+
+[node name="SongWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap"]
+margin_top = 14.0
+margin_right = 292.0
+margin_bottom = 58.0
+size_flags_horizontal = 2
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameMusicWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap"]
+margin_right = 128.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 128, 0 )
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicLinkWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap"]
+margin_right = 128.0
+margin_bottom = 6.0
+
+[node name="MusicLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/MusicLinkWrap"]
+margin_left = 25.0
+margin_right = 103.0
+margin_bottom = 6.0
+size_flags_horizontal = 4
+text = "Lisa Simpson"
+
+[node name="AuthorWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap"]
+margin_top = 14.0
+margin_right = 128.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="ByLabel" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/AuthorWrap"]
+margin_left = 21.0
+margin_right = 34.0
+margin_bottom = 6.0
+text = "by"
+
+[node name="AuthorLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/AuthorWrap"]
+margin_left = 38.0
+margin_right = 107.0
+margin_bottom = 6.0
+text = "Antti Luode"
+
+[node name="LicenseWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap"]
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
+
+[node name="LicensedLabel" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/LicenseWrap"]
+margin_right = 128.0
+margin_bottom = 6.0
+text = "Licensed under"
+align = 1
+
+[node name="LicenseLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/LicenseWrap"]
+margin_left = 37.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 16.0
+size_flags_horizontal = 4
+text = "CC BY 3.0"
+
+[node name="MenuMusicWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap"]
+margin_left = 136.0
+margin_right = 292.0
+margin_bottom = 44.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/OptionsWrap"]
-margin_right = 120.0
-margin_bottom = 24.0
+[node name="MusicLinkWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap"]
+margin_right = 156.0
+margin_bottom = 6.0
+
+[node name="MusicLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/MusicLinkWrap"]
+margin_right = 156.0
+margin_bottom = 6.0
+size_flags_horizontal = 4
+text = "Echoes of Civilized World"
+
+[node name="AuthorWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap"]
+margin_top = 14.0
+margin_right = 156.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="ByLabel" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/AuthorWrap"]
+margin_left = 35.0
+margin_right = 48.0
+margin_bottom = 6.0
+text = "by"
+
+[node name="AuthorLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/AuthorWrap"]
+margin_left = 52.0
+margin_right = 121.0
+margin_bottom = 6.0
+text = "Antti Luode"
+
+[node name="LicenseWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap"]
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 44.0
+
+[node name="LicensedLabel" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/LicenseWrap"]
+margin_right = 156.0
+margin_bottom = 6.0
+text = "Licensed under"
+align = 1
+
+[node name="LicenseLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/LicenseWrap"]
+margin_left = 51.0
+margin_top = 10.0
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 4
+text = "CC BY 3.0"
+
+[node name="FontCreditWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap"]
+margin_top = 62.0
+margin_right = 292.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FontTitle" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap"]
+margin_right = 292.0
+margin_bottom = 6.0
 size_flags_vertical = 1
-text = "and this is where i'd put my credits... IF I HAD SOME!"
+custom_fonts/font = SubResource( 2 )
+text = "Font"
+align = 1
 autowrap = true
 
+[node name="FontWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap"]
+margin_top = 14.0
+margin_right = 292.0
+margin_bottom = 58.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainFontWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap"]
+margin_left = 95.0
+margin_right = 197.0
+margin_bottom = 44.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FontLinkWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap"]
+margin_right = 102.0
+margin_bottom = 6.0
+
+[node name="FontLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/FontLinkWrap"]
+margin_left = 15.0
+margin_right = 87.0
+margin_bottom = 6.0
+size_flags_horizontal = 4
+text = "Dogicapixel"
+
+[node name="AuthorWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap"]
+margin_top = 14.0
+margin_right = 102.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="ByLabel" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/AuthorWrap"]
+margin_right = 13.0
+margin_bottom = 6.0
+text = "by"
+
+[node name="AuthorLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/AuthorWrap"]
+margin_left = 17.0
+margin_right = 102.0
+margin_bottom = 6.0
+text = "Roberto Mocci"
+
+[node name="LicenseWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap"]
+margin_top = 28.0
+margin_right = 102.0
+margin_bottom = 44.0
+
+[node name="LicensedLabel" type="Label" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/LicenseWrap"]
+margin_right = 102.0
+margin_bottom = 6.0
+text = "Licensed under"
+align = 1
+
+[node name="LicenseLink" type="LinkButton" parent="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/LicenseWrap"]
+margin_left = 29.0
+margin_top = 10.0
+margin_right = 72.0
+margin_bottom = 16.0
+size_flags_horizontal = 4
+text = "OFL-1.1"
+
 [node name="MainMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 76.0
-margin_right = 120.0
-margin_bottom = 94.0
+margin_left = 86.0
+margin_top = 151.0
+margin_right = 206.0
+margin_bottom = 169.0
+size_flags_horizontal = 4
 text = "Main Menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in_confirmation = SubResource( 2 )
+anims/slide_in_confirmation = SubResource( 3 )
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/MusicLinkWrap/MusicLink" to="." method="_on_GameMusicLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/AuthorWrap/AuthorLink" to="." method="_on_GameMusicAuthorLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/GameMusicWrap/LicenseWrap/LicenseLink" to="." method="_on_GameMusicLicenseLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/MusicLinkWrap/MusicLink" to="." method="_on_MenuMusicLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/AuthorWrap/AuthorLink" to="." method="_on_MenuMusicAuthorLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/MusicCreditWrap/SongWrap/MenuMusicWrap/LicenseWrap/LicenseLink" to="." method="_on_MenuMusicLicenseLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/FontLinkWrap/FontLink" to="." method="_on_FontLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/AuthorWrap/AuthorLink" to="." method="_on_FontAuthorLink_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsWrap/FontCreditWrap/FontWrap/MainFontWrap/LicenseWrap/LicenseLink" to="." method="_on_FontLicenseLink_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
