@@ -9,8 +9,8 @@ export(String) var previousButtonText = "Main Menu"
 onready var previousMenuButton = $MarginContainer/VBoxContainer/PreviousMenuButton
 onready var clearSaveButton = $MarginContainer/VBoxContainer/OptionsWrap/ClearSaveButton
 onready var animation = $AnimationPlayer
-onready var cameraShakeCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox
-onready var devConsoleCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox
+onready var cameraShakeCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/CameraShakeOptionWrap/CameraShakeCheckBox
+onready var devConsoleCheckbox = $MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap/DevConsoleCheckWrap/DevConsoleCheckBox
 onready var clickAudio = $ClickAudio
 
 var settingsFile

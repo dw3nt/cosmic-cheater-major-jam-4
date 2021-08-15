@@ -83,7 +83,7 @@ custom_constants/margin_bottom = 8
 margin_left = 68.0
 margin_top = 8.0
 margin_right = 252.0
-margin_bottom = 172.0
+margin_bottom = 198.0
 size_flags_horizontal = 4
 custom_constants/separation = 20
 
@@ -97,59 +97,76 @@ align = 1
 [node name="OptionsWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 32.0
 margin_right = 184.0
-margin_bottom = 114.0
+margin_bottom = 118.0
 size_flags_horizontal = 4
-custom_constants/separation = 8
+custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CameraShakeOptionWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/OptionsWrap"]
+[node name="CheckBoxWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/OptionsWrap"]
+margin_right = 184.0
+margin_bottom = 48.0
+custom_constants/separation = -2
+
+[node name="CameraShakeOptionWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap"]
 margin_right = 154.0
 margin_bottom = 24.0
 size_flags_horizontal = 0
 alignment = 1
 
-[node name="CameraShakeCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap"]
+[node name="CameraShakeCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/CameraShakeOptionWrap"]
 margin_right = 24.0
 margin_bottom = 24.0
 pressed = true
 
-[node name="CameraShakeLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap"]
+[node name="CameraShakeLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/CameraShakeOptionWrap"]
 margin_left = 28.0
 margin_top = 9.0
 margin_right = 154.0
 margin_bottom = 15.0
 text = "Enable Camera Shake"
 
-[node name="DevConsoleOptionWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/OptionsWrap"]
-margin_top = 32.0
+[node name="DevConsoleOptionWrap" type="VBoxContainer" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap"]
+margin_top = 22.0
 margin_right = 184.0
-margin_bottom = 56.0
+margin_bottom = 48.0
+custom_constants/separation = -4
+
+[node name="DevConsoleCheckWrap" type="HBoxContainer" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap"]
+margin_right = 184.0
+margin_bottom = 24.0
 size_flags_horizontal = 0
 alignment = 1
 
-[node name="DevConsoleCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap"]
+[node name="DevConsoleCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap/DevConsoleCheckWrap"]
 margin_right = 24.0
 margin_bottom = 24.0
 
-[node name="DevConsoleLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap"]
+[node name="DevConsoleLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap/DevConsoleCheckWrap"]
 margin_left = 28.0
 margin_top = 9.0
 margin_right = 184.0
 margin_bottom = 15.0
 text = "Enable Developer Console"
 
-[node name="ClearSaveButton" parent="MarginContainer/VBoxContainer/OptionsWrap" instance=ExtResource( 2 )]
-margin_top = 64.0
+[node name="DevConsoleControlLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap"]
+margin_top = 20.0
 margin_right = 184.0
-margin_bottom = 82.0
+margin_bottom = 26.0
+text = "( toggle with backtick - ` )"
+align = 2
+
+[node name="ClearSaveButton" parent="MarginContainer/VBoxContainer/OptionsWrap" instance=ExtResource( 2 )]
+margin_top = 68.0
+margin_right = 184.0
+margin_bottom = 86.0
 text = "Clear Save Data"
 
 [node name="PreviousMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 134.0
+margin_top = 138.0
 margin_right = 184.0
-margin_bottom = 152.0
+margin_bottom = 156.0
 text = "Main Menu"
 
 [node name="FadedBackground" type="ColorRect" parent="."]
@@ -241,10 +258,10 @@ anims/slide_in_confirmation = SubResource( 2 )
 [node name="ClickAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -15.0
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_mouse_entered"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_toggled"]
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_mouse_entered"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/DevConsoleOptionWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_toggled"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_mouse_entered"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/CameraShakeOptionWrap/CameraShakeCheckBox" to="." method="_on_CameraShakeCheckBox_toggled"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap/DevConsoleCheckWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_mouse_entered"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/OptionsWrap/CheckBoxWrap/DevConsoleOptionWrap/DevConsoleCheckWrap/DevConsoleCheckBox" to="." method="_on_DevConsoleCheckBox_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsWrap/ClearSaveButton" to="." method="_on_ClearSaveButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PreviousMenuButton" to="." method="_on_PreviousMenuButton_pressed"]
 [connection signal="pressed" from="ConfirmationPopUp/MarginContainer/PanelContainer/Panel/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
