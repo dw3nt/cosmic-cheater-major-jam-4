@@ -20,6 +20,8 @@ position = Vector2( -64, 0 )
 [node name="Exit" parent="LevelTransitionWrap" index="1" instance=ExtResource( 2 )]
 position = Vector2( 96, 128 )
 scale = Vector2( 1, 2 )
+transitionToScene = "res://rooms/Level13.tscn"
+spawnNodeName = "Enter"
 
 [node name="SpawnPos" type="Position2D" parent="LevelTransitionWrap/Exit" index="1"]
 position = Vector2( -64, 0 )
