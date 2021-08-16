@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://rooms/BaseLevel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://fonts/default_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/dogicapixel.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=3]
 [ext_resource path="res://rooms/LevelTransitioner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/images/world/player-fire-rate.png" type="Texture" id=5]
@@ -11,6 +11,10 @@
 [ext_resource path="res://world/CheatWall.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/Enemy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/images/world/god-mode.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_bottom = 4
+font_data = ExtResource( 2 )
 
 [node name="Level14" instance=ExtResource( 1 )]
 
@@ -205,7 +209,7 @@ margin_top = 16.0
 margin_right = 246.0
 margin_bottom = 89.0
 theme = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "And here is where I'd put 
 more levels if I better 
 understood how long 
@@ -234,3 +238,4 @@ texture = ExtResource( 6 )
 [node name="CheatWall5" parent="." index="22" instance=ExtResource( 9 )]
 position = Vector2( 0, -512 )
 texture = ExtResource( 11 )
+[connection signal="level_change_requested" from="LevelTransitionWrap/Enter" to="." method="_on_LevelTransitioner_level_change_requested"]

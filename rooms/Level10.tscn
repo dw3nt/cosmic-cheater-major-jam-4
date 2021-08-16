@@ -33,6 +33,9 @@ doorCost = 100
 position = Vector2( 48, -96 )
 attachedDoorPath = NodePath("../../SwitchDoorWrap/MetalDoor")
 
+[node name="Camera" parent="Player" index="10"]
+limit_right = 640
+
 [node name="Enemy" parent="EnemyWrap" index="0" instance=ExtResource( 3 )]
 position = Vector2( -112, -192 )
 

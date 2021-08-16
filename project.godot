@@ -32,7 +32,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="CosmicCheater-MajorJam4"
+config/name="Albie's Adventure"
+config/description="Dual Wield Entertainment's submission to Major Jam 4. The theme was Cosmos with the limitation of the player must cheat."
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://assets/images/logo-initials-320x180.png"
 boot_splash/fullsize=false

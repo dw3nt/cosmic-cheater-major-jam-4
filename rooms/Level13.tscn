@@ -47,3 +47,5 @@ position = Vector2( 480, -208 )
 
 [node name="Enemy2" parent="EnemyWrap" index="1" instance=ExtResource( 5 )]
 position = Vector2( 592, 0 )
+[connection signal="level_change_requested" from="LevelTransitionWrap/Enter" to="." method="_on_LevelTransitioner_level_change_requested"]
+[connection signal="level_change_requested" from="LevelTransitionWrap/Exit" to="." method="_on_LevelTransitioner_level_change_requested"]
